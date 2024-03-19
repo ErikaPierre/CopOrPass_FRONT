@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+#root {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+}
+
+p {
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.25rem;
+}
+
+#connexion,
+#inscription {
+  /* background-image: url("src/assets/Logo_Site/Logo.png");
+  background-repeat:round; */
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#page_product {
+  padding: 20px 0 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product_s {
+  width: 1000px;
+}
+
+#border-img {
+  border: 3px dotted black;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+#size-photo {
+  width: 160rem;
+}
+
+.navbar-menu {
+  background: linear-gradient(90deg, #99d6ff, #007acc);
+}
+
+.navbar:hover {
+  background-color: none;
+}
+
+#menu-item:hover {
+  text-decoration: line-through;
+  background: none;
+  font-weight: bold;
+}
+
+.card-accueil {
+  width: 400px;
+  gap: 15px;
+}
+
+.card-article {
+  width: 85%;
+}
+
+#card-border:hover {
+  border: 2px solid #007acc;
+}
+
+.section-article_1 {
+  position: relative;
+  max-height: 550px;
+  border-top: 7px double #007acc;
+  border-bottom: 7px double #007acc;
+}
+
+.article-photo {
+  position: relative;
+  top: -15px;
+  left: 30px;
+}
+
+#red {
+  color: red;
+  text-decoration: underline;
+}
