@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 
 function Header() {
+  const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem("user"));
+
+  const handleLogout = async () => {
+    localStorage.removeItem("user");
+    navigate("/connexion");
+  };
+
   return (
     <div>
       <div className="Logo is-flex is-justify-content-center">
@@ -81,14 +89,25 @@ function Header() {
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons mr-4">
-                <Link to="/inscription">
-                  <button class="button is-info">Inscription</button>
-                </Link>
-                <Link to="/connexion">
-                  <button class="button is-info is-light">
-                    <FaRegUser />
+                {userData ? (
+                  <button
+                    class="button is-info is-light"
+                    onClick={handleLogout}
+                  >
+                    Deconnexion
                   </button>
-                </Link>
+                ) : (
+                  <>
+                    <Link to="/inscription">
+                      <button class="button is-info">Inscription</button>
+                    </Link>
+                    <Link to="/connexion">
+                      <button class="button is-info is-light">
+                        <FaRegUser />
+                      </button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

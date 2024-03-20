@@ -7,7 +7,6 @@ function ConnexionPage() {
 
   const loginUser = (event) => {
     event.preventDefault();
-
     fetch("http://localhost:1234/auth/connexion", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
