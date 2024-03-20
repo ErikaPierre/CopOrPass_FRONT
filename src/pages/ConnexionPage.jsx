@@ -1,19 +1,39 @@
+import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 
 function ConnexionPage() {
-  
   const [userEmailLogin, setUserEmailLogin] = useState("");
   const [userPasswordLogin, setUserPasswordLogin] = useState("");
 
-  const handleSubmit = (event) => {
+  const loginUser = (event) => {
     event.preventDefault();
+
+    fetch("http://localhost:1234/auth/connexion", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: userEmailLogin,
+        password: userPasswordLogin,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        const { token } = data;
+        const decodedUser = jwtDecode(token);
+        localStorage.setItem("user", JSON.stringify(decodedUser));
+        localStorage.setItem("token", JSON.stringify(token));
+        console.log(token);
+        window.location.reload();
+      })
+      .catch((error) => console.error("Erreur lors de la connexion :", error));
   };
 
   return (
     <div className="login is-flex-direction-column " id="connexion">
       <h1 className="title is-4">Connexion</h1>
 
-      <form method="post" onSubmit={handleSubmit}>
+      <form method="post" onSubmit={loginUser}>
         <div className="field">
           <p className="control has-icons-left has-icons-right">
             <input
@@ -45,11 +65,11 @@ function ConnexionPage() {
             </span>
           </p>
         </div>
-        <label class="checkbox">
+        <label className="checkbox">
           <input type="checkbox" /> Se souvenir de moi
         </label>
         <br />
-        <label class="checkbox">
+        <label className="checkbox">
           <input type="checkbox" /> J'accepte
           <a href="#"> les termes et conditions</a>
         </label>

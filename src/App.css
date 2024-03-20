@@ -48,6 +48,11 @@ p {
   border-radius: 50%;
 }
 
+#border-btn-release {
+  border: none;
+  background: none;
+}
+
 #size-photo {
   width: 160rem;
 }
@@ -71,12 +76,20 @@ p {
   gap: 15px;
 }
 
+.card-release {
+  width: 400px;
+}
+
 .card-article {
   width: 85%;
 }
 
 #card-border:hover {
   border: 2px solid #007acc;
+}
+
+#card-border-release:hover {
+  border: 1px solid black;
 }
 
 .section-article_1 {

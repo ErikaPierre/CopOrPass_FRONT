@@ -4,7 +4,7 @@ import "bulma/css/bulma.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import CardArticleAccueil from "../components/CardArticleAccueil";
-import CardAccueil from "../components/CardCdcAccueil";
+import CardCdcAccueil from "../components/CardCdcAccueil";
 import Carousel from "../components/CarouselAccueil";
 
 import { useState } from "react";
@@ -16,21 +16,21 @@ const sneakersTab = [
     name: "Air force 1 - Triple White",
     brand: "Nike",
     logo: "src/assets/Logos_Marques/nike-logo.webp",
-    date: "08/02/2024",
+    // date: "08/02/2024",
   },
   {
     imageUrl: "src/assets/Cdc/AF1_BR.jpg",
     name: "Air force 1 - Cheery Line",
     brand: "Nike",
     logo: "src/assets/Logos_Marques/nike-logo.webp",
-    date: "14/02/2024",
+    // date: "14/02/2024",
   },
   {
     imageUrl: "src/assets/Cdc/Jordan_1.jpg",
     name: "Air Jordan High - Baby Blue ",
     brand: "Jordan",
     logo: "src/assets/Logos_Marques/logo-jordan.webp",
-    date: "23/02/2024",
+    // date: "23/02/2024",
   },
 ];
 
@@ -112,7 +112,7 @@ function HomePage() {
           <div className="wrapper is-flex is-justify-content-space-around	">
             {sneakers.map((sneaker) => {
               return (
-                <CardAccueil
+                <CardCdcAccueil
                   key={sneaker.name}
                   imageUrl={sneaker.imageUrl}
                   name={sneaker.name}

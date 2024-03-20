@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaRegUser } from "react-icons/fa";
 
 function Header() {
   return (
@@ -79,12 +80,14 @@ function Header() {
 
           <div class="navbar-end">
             <div class="navbar-item">
-              <div class="buttons">
+              <div class="buttons mr-4">
                 <Link to="/inscription">
                   <button class="button is-info">Inscription</button>
                 </Link>
                 <Link to="/connexion">
-                  <button class="button is-info is-light">Connexion</button>
+                  <button class="button is-info is-light">
+                    <FaRegUser />
+                  </button>
                 </Link>
               </div>
             </div>

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
+import CardRelease from "../components/CardRelease";
+import Sidebar from "../components/Sidebar";
 
 function ReleasePage() {
-  const [productsFutur, setProductsFutur] = useState([]);
+  const [productsRelease, setProductsRelease] = useState([]);
 
   const getAllProducts = () => {
-    // Accéder à tous les produits
-    fetch("http://localhost:5173/products/all").then(async (res) => {
+    fetch("http://localhost:1234/products/all").then(async (res) => {
       const data = await res.json();
-      console.log(data);
-      setProductsFutur(data);
-      setProductsFutur(data.title);
+      console.log(data.products);
+      setProductsRelease(data.products);
     });
   };
 
@@ -18,12 +18,25 @@ function ReleasePage() {
   }, []);
 
   return (
-    <div className="releases is-flex p-3 mb-3">
-      <div className="filtre mr-3">
-        <p>Barre de filtre</p>
+    <div className="releases  mb-4">
+      <div className="is-flex is-justify-content-center p-4 mt-4 mb-4">
+        <h1 className="title is-3">
+          &#129327; Toutes les paires à venir &#129327;
+        </h1>
       </div>
-      <div className="all-releases">
-        <h1 className="title is-3">Toutes les paires à venir</h1>
+      <div className="wrapper columns is-flex-wrap-wrap	is-justify-content-center	">
+        {productsRelease.map((product) => {
+          return (
+            <CardRelease
+              key={product._id}
+              image={product.image}
+              dateRelease={product.dateRelease}
+              brand={product.brand}
+              modeleName={product.modeleName}
+              color={product.color}
+            />
+          );
+        })}
       </div>
     </div>
   );

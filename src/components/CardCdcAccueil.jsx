@@ -1,4 +1,4 @@
-function CardAccueil({ imageUrl, name, logo, date, brand }) {
+function CardCdcAccueil({ imageUrl, name, logo, date, brand }) {
   return (
     <div className="card card-accueil" id="card-border">
       <div className="title-card has-text-centered mt-3 mb-3">
@@ -25,11 +25,11 @@ function CardAccueil({ imageUrl, name, logo, date, brand }) {
         </div>
 
         <div className="content">
-          <time dateTime="">Date de sortie : {date}</time>
+          {/* <time dateTime="">Date de sortie : {date}</time> */}
         </div>
       </div>
     </div>
   );
 }
 
-export default CardAccueil;
+export default CardCdcAccueil;

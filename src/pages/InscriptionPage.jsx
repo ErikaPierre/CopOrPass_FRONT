@@ -1,16 +1,35 @@
 import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
 
 function InscriptionPage() {
   const [userEmailRegister, setUserEmailRegister] = useState("");
   const [userPasswordRegister, setUserPasswordRegister] = useState("");
 
-  const handleSubmit = (event) => {
+  const registerUser = (event) => {
     event.preventDefault();
+
+    try {
+      fetch("http://localhost:1234/auth/inscription", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: userEmailRegister,
+          password: userPasswordRegister,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          window.location.reload();
+        });
+    } catch (error) {
+      console.error("Erreur lors du login: ", error.message);
+    }
   };
+
   return (
     <div className="login is-flex-direction-column " id="connexion">
       <h1 className="title is-4">Inscription</h1>
-      <form method="post" onSubmit={handleSubmit}>
+      <form method="post" onSubmit={registerUser}>
         <div className="field">
           <p className="control has-icons-left has-icons-right">
             <input
@@ -52,7 +71,7 @@ function InscriptionPage() {
         </label>
         <div className="field is-flex is-justify-content-center mt-3">
           <p className="control">
-            <button className="button is-info">Connexion</button>
+            <button className="button is-info">Inscription</button>
           </p>
         </div>
       </form>

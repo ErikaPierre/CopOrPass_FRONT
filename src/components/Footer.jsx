@@ -67,7 +67,7 @@ function Footer() {
         </form>
       </div>
 
-      <div className="column contacts is-flex-direction-column">
+      <div className="column contacts">
         <div>
           <a href="https://twitter.com/">
             <img src="src/assets/RS/twitter.png" alt="" />
