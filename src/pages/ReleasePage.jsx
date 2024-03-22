@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import CardRelease from "../components/CardRelease";
-import Sidebar from "../components/Sidebar";
 
 function ReleasePage() {
-  const [productsRelease, setProductsRelease] = useState([]);
+  const [releases, setReleases] = useState([]);
 
-  const getAllProducts = () => {
-    fetch("http://localhost:1234/products/all").then(async (res) => {
+  const getAllReleases = () => {
+    fetch("http://localhost:1234/all/releases").then(async (res) => {
       const data = await res.json();
-      console.log(data.products);
-      setProductsRelease(data.products);
+      console.log(data.releases);
+      setReleases(data.releases);
     });
   };
 
   useEffect(() => {
-    getAllProducts();
+    getAllReleases();
   }, []);
 
   return (
@@ -25,15 +24,15 @@ function ReleasePage() {
         </h1>
       </div>
       <div className="wrapper columns is-flex-wrap-wrap	is-justify-content-center	">
-        {productsRelease.map((product) => {
+        {releases.map((release) => {
           return (
             <CardRelease
-              key={product._id}
-              image={product.image}
-              dateRelease={product.dateRelease}
-              brand={product.brand}
-              modeleName={product.modeleName}
-              color={product.color}
+              key={release._id}
+              image={release.image}
+              dateRelease={release.dateRelease}
+              brand={release.brand}
+              modeleName={release.modeleName}
+              color={release.color}
             />
           );
         })}

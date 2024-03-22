@@ -23,20 +23,28 @@ function CardRelease({ image, dateRelease, brand, modeleName, color }) {
       </div>
       <div className="card-content">
         <div className="media-content">
-          <p className="title is-6">Modèle : {modeleName}</p>
-          <p className="title is-6">Colori : {color}</p>
-          <time dateTime="">Date de sortie : {dateRelease}</time>
+          <p className="title is-5">Modèle : {modeleName}</p>
+          <p className="title is-5">Colori : {color}</p>
+          <p className="title is-5">Date de sortie : {dateRelease}</p>
         </div>
       </div>
       <div className="bouton-like-dislike is-flex is-justify-content-space-around	">
         <div className="Like is-flex">
-          <button className="button-like mr-2" id="border-btn-release" onClick={likeCounter}>
+          <button
+            className="button-like mr-2"
+            id="border-btn-release"
+            onClick={likeCounter}
+          >
             💜
           </button>
           <p>{counter}</p>
         </div>
         <div className="Dislike is-flex">
-          <button className="button-dislike mr-2" id="border-btn-release" onClick={dislikeCounter}>
+          <button
+            className="button-dislike mr-2"
+            id="border-btn-release"
+            onClick={dislikeCounter}
+          >
             👎🏾
           </button>
           <p>{discounter}</p>

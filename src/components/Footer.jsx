@@ -8,38 +8,42 @@ function Footer() {
   };
 
   return (
-    <div className="columns has-background-black has-text-white p-3">
-      <div className="column logo">
+    <div className="columns has-background-black has-text-white p-3 mt-4">
+      <div className="column logo is-flex is-justify-content-center	is-align-items-center	">
         <a href="http://localhost:5173/">
           <img src="src/assets/Logo_Site/SneakyLogo.png" width="180" />
         </a>
       </div>
 
-      <div className="column pages">
-        <a class="navbar-item has-text-white" id="menu-item">
-          <p>Accueil</p>
-        </a>
-        <a class="navbar-item has-text-white" id="menu-item">
-          <p>Galerie &#128095;</p>
-        </a>
-        <a class="navbar-item has-text-white" id="menu-item">
-          <p>Releases &#129327;</p>
-        </a>
-        <a class="navbar-item has-text-white" id="menu-item">
-          <p>Hot drop &#128293;</p>
-        </a>
+      <div className="column pages is-flex is-justify-content-center is-align-items-center">
+        <div>
+          <a class="navbar-item has-text-white" id="menu-item">
+            <p>Accueil</p>
+          </a>
+          <a class="navbar-item has-text-white" id="menu-item">
+            <p>Galerie &#128095;</p>
+          </a>
+          <a class="navbar-item has-text-white" id="menu-item">
+            <p>Releases &#129327;</p>
+          </a>
+          <a class="navbar-item has-text-white" id="menu-item">
+            <p>Hot drop &#128293;</p>
+          </a>
+        </div>
       </div>
 
-      <div className="column infos">
-        <a class="navbar-item has-text-white">
-          <p>Mentions légales</p>
-        </a>
-        <a class="navbar-item has-text-white">
-          <p>A propos</p>
-        </a>
-        <a class="navbar-item has-text-white">
-          <p>Contactez-nous</p>
-        </a>
+      <div className="column infos is-flex is-justify-content-center is-align-items-center">
+        <div>
+          <a class="navbar-item has-text-white" id="menu-item">
+            <p>Mentions légales</p>
+          </a>
+          <a class="navbar-item has-text-white" id="menu-item">
+            <p>A propos</p>
+          </a>
+          <a class="navbar-item has-text-white" id="menu-item">
+            <p>Contactez-nous</p>
+          </a>
+        </div>
       </div>
 
       <div className="column form">
@@ -67,21 +71,23 @@ function Footer() {
         </form>
       </div>
 
-      <div className="column contacts">
-        <div>
-          <a href="https://twitter.com/">
-            <img src="src/assets/RS/twitter.png" alt="" />
-          </a>
-        </div>
-        <div>
-          <a href="https://www.instagram.com/">
-            <img src="src/assets/RS/insta.png" alt="" />
-          </a>
-        </div>
-        <div>
-          <a href="https://discord.com/">
-            <img src="src/assets/RS/discord.png" alt="" />
-          </a>
+      <div className="column contacts is-flex is-justify-content-center is-align-items-center">
+        <div className="is-flex-direction-column">
+          <div className="twitter">
+            <a href="https://twitter.com/">
+              <img src="src/assets/RS/twitter.png" alt="" />
+            </a>
+          </div>
+          <div className="instagram">
+            <a href="https://www.instagram.com/">
+              <img src="src/assets/RS/insta.png" alt="" />
+            </a>
+          </div>
+          <div className="discord">
+            <a href="https://discord.com/">
+              <img src="src/assets/RS/discord.png" alt="" />
+            </a>
+          </div>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@ function Header() {
 
   return (
     <div>
-      <div className="Logo is-flex is-justify-content-center">
+      <div className="logo is-flex is-justify-content-center">
         <Link to="http://localhost:5173/">
           <img
             id="border-img"
@@ -61,7 +61,7 @@ function Header() {
               Releases
             </Link>
             <Link to="/drops" class="navbar-item has-text-white" id="menu-item">
-              Hot drop
+              Drops
             </Link>
 
             <div class="navbar-item has-dropdown is-hoverable">
