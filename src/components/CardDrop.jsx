@@ -18,15 +18,20 @@ function CardDrop({ image, dateRelease, brand, modeleName, color, price }) {
           <img src={image} alt="" />
         </figure>
       </div>
-      <div className="title-card is-size-4 has-text-centered p-3">
-        <strong>{brand}</strong>
+      <div className="title-card is-size-5 p-3 mt-2" id="border-marques">
+        {brand}
       </div>
       <div className="card-content">
         <div className="media-content">
-          <p className="title is-6">Modèle : {modeleName}</p>
-          <p className="title is-6">Colori : {color}</p>
-          <p className="title is-6">Prix : {price}</p>
-          <time dateTime="">Date de sortie : {dateRelease}</time>
+          <p className="subtitle is-4 has-text-weight-bold has-text-centered">
+            {modeleName}
+          </p>
+          <p className="subtitle is-5">
+            <b>Colori -</b> {color}
+          </p>
+          <p className="subtitle is-5">
+            <b>Prix -</b> {price}€
+          </p>
         </div>
       </div>
       <div className="bouton-like-dislike is-flex is-justify-content-space-around	">

@@ -8,9 +8,9 @@ import HomePage from "./pages/HomePage.jsx";
 import GaleriePage from "./pages/GaleriePage.jsx";
 import ConnexionPage from "./pages/ConnexionPage.jsx";
 import InscriptionPage from "./pages/InscriptionPage.jsx";
-import DropsPage from "./pages/DropsPage.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import ReleasePage from "./pages/ReleasePage.jsx";
+import DropsPage from "./pages/DropsPage.jsx"
 
 const router = createBrowserRouter([
   {
@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <DropsPage />,
       },
       {
-        path: "/products",
+        path: "/product",
         element: <ProductPage />,
       },
       {

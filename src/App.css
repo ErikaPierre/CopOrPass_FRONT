@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 #root {
@@ -48,6 +48,11 @@ p {
   border-radius: 50%;
 }
 
+#border-marques {
+  border: 1px solid #007acc;
+  border-radius: 10px;
+}
+
 #border-btn-release {
   border: none;
   background: none;
@@ -89,7 +94,14 @@ p {
 }
 
 #card-border-release:hover {
+  background-color: #99d6ff39;
+  -webkit-transform: rotate(-5deg);
+  transform: rotate(-5deg);
+}
+
+#card-border-release {
   border: 1px solid black;
+  border-radius: 10px;
 }
 
 .section-article_1 {
@@ -108,4 +120,8 @@ p {
 #red {
   color: red;
   text-decoration: underline;
+}
+
+.box{
+  width: 150px;
 }
