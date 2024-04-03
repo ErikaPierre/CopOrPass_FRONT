@@ -1,13 +1,15 @@
 import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function ConnexionPage() {
   const [userEmailLogin, setUserEmailLogin] = useState("");
   const [userPasswordLogin, setUserPasswordLogin] = useState("");
+  const navigate = useNavigate();
 
   const loginUser = (event) => {
     event.preventDefault();
-    fetch("http://localhost:1234/auth/connexion", {
+    fetch("http://localhost:1234/user/connexion", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -20,10 +22,13 @@ function ConnexionPage() {
         console.log(data);
         const { token } = data;
         const decodedUser = jwtDecode(token);
-        localStorage.setItem("user", JSON.stringify(decodedUser));
-        localStorage.setItem("token", JSON.stringify(token));
+        sessionStorage.setItem("user", JSON.stringify(decodedUser));
+        sessionStorage.setItem("admin", JSON.stringify(decodedUser));
+        sessionStorage.setItem("token", JSON.stringify(token));
         console.log(token);
-        window.location.reload();
+        navigate('/')
+        // window.location.reload();
+
       })
       .catch((error) => console.error("Erreur lors de la connexion :", error));
   };
@@ -72,10 +77,13 @@ function ConnexionPage() {
           <input type="checkbox" /> J'accepte
           <a href="#"> les termes et conditions</a>
         </label>
-        <div className="field is-flex is-justify-content-center mt-3">
+        <div className="field is-flex is-justify-content-center mt-3 mb-6">
           <p className="control">
             <button className="button is-info">Connexion</button>
           </p>
+        </div>
+        <div className="register is-flex is-justify-content-center">
+          Pas de compte ? Je <Link to="/inscription"> m'inscris</Link>
         </div>
       </form>
     </div>

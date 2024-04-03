@@ -65,10 +65,6 @@ function InscriptionPage() {
           <input type="checkbox" /> Se souvenir de moi
         </label>
         <br />
-        <label class="checkbox">
-          <input type="checkbox" /> J'accepte
-          <a href="#"> les termes et conditions</a>
-        </label>
         <div className="field is-flex is-justify-content-center mt-3">
           <p className="control">
             <button className="button is-info">Inscription</button>

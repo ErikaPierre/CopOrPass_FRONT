@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function CardDrop({ image, dateRelease, brand, modeleName, color, price }) {
+function CardDrop({ image, brand, modeleName, color, price }) {
   const [counter, setCounter] = useState(0);
   const [discounter, setDiscounter] = useState(0);
 
@@ -18,20 +18,23 @@ function CardDrop({ image, dateRelease, brand, modeleName, color, price }) {
           <img src={image} alt="" />
         </figure>
       </div>
-      <div className="title-card is-size-5 p-3 mt-2" id="border-marques">
-        {brand}
+      <div className="title-card is-size-5 p-3">
+        <span class="tag is-warning is-medium">{brand}</span>
       </div>
       <div className="card-content">
         <div className="media-content">
-          <p className="subtitle is-4 has-text-weight-bold has-text-centered">
+          <p
+            className="subtitle is-5 has-text-weight-bold has-text-centered p-2"
+            id="border-drop-card-name"
+          >
             {modeleName}
           </p>
           <p className="subtitle is-5">
             <b>Colori -</b> {color}
           </p>
-          <p className="subtitle is-5">
-            <b>Prix -</b> {price}€
-          </p>
+          <span className="price is-size-2 has-text-info has-text-weight-bold	">
+            {price}€
+          </span>
         </div>
       </div>
       <div className="bouton-like-dislike is-flex is-justify-content-space-around	">

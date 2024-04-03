@@ -35,7 +35,7 @@ function CardRelease({ image, dateRelease, brand, modeleName, color }) {
             id="border-btn-release"
             onClick={likeCounter}
           >
-            💜
+            🔥
           </button>
           <p>{counter}</p>
         </div>

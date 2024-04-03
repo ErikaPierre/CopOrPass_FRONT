@@ -1,5 +1,4 @@
 import "../App.css";
-import "../Carousel.css";
 import "bulma/css/bulma.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -65,7 +64,6 @@ const sneakersArticles = [
 ];
 
 function HomePage() {
-  
   const [sneakers, setSneakers] = useState(sneakersTab);
   const [articles, setArticles] = useState(sneakersArticles);
 
@@ -130,11 +128,15 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="section-article_1 has-background-info-light	is-flex mb-6">
+        <div className="section-article_1 is-flex is-align-items-center has-background-info-light mb-6">
           <div className="article-photo">
-            <img id="size-photo" src="src/assets/AF1_MCR.jpg" alt="" />
+            <img
+              id="size-photo"
+              src="src/assets/images/sneakers/AF1_MCR.jpg"
+              alt=""
+            />
           </div>
-          <div className="article-MCR has-text-justified has-text-black p-6">
+          <div className="article-MCR	has-text-justified has-text-black p-6">
             <h3 className="titre is-size-5 has-text-centered">
               &#128293; COUP DE COEUR DE CE MOIS &#128293;
             </h3>
@@ -218,32 +220,60 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="section-carrousel p-6 has-background-info	mb-6">
-          <h3 className="titre-intro-2 has-text-black is-size-3 has-text-weight-bold	mt-2 mb-4">
+        <div className="section-carrousel p-6 has-background-info-light	mb-6">
+          <h3 className="titre-intro-2 has-text-info is-size-3 has-text-weight-bold	mt-2 mb-4">
             &#128293; LAST HOT DROPS &#128293;
           </h3>
           <Carousel />
         </div>
 
-        <div className="section-article_2 has-text-black ml-3 mb-5">
-          {articles.map((article) => {
-            return (
-              <CardArticleAccueil
-                key={article.name}
-                imageUrl={article.imageUrl}
-                category={article.category}
-                url={article.url}
-                name={article.name}
-                content={article.content}
-                date={article.date}
-              />
-            );
-          })}
+        <div className=" is-flex has-text-black ml-3 mb-5">
+          <div className="section-article_2">
+            {articles.map((article) => {
+              return (
+                <CardArticleAccueil
+                  key={article.name}
+                  imageUrl={article.imageUrl}
+                  category={article.category}
+                  url={article.url}
+                  name={article.name}
+                  content={article.content}
+                  date={article.date}
+                />
+              );
+            })}
+          </div>
+          {/* <h1 className="title is-5">Nos marques</h1>
+          <div class="grid is-flex">
+            <div class="cell">
+              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            </div>
+            <div class="cell">
+              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            </div>
+            <div class="cell">
+              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            </div>
+            <div class="cell">
+              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            </div>
+            <div class="cell">
+              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            </div>
+            <div class="cell">
+              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            </div>
+            <div class="cell">
+              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            </div>
+            <div class="cell">
+              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            </div>
+          </div> */}
         </div>
       </main>
     </>
   );
 }
-
 
 export default HomePage;

@@ -34,13 +34,8 @@ const Carousel = () => {
   };
 
   return (
-    <div className="carousel">
+    <div className="carousel is-flex is-align-items-center	is-justify-content-center">
       <FaChevronCircleLeft className="carousel-arrow" onClick={prevSlide} />
-      {/* <img
-        src={images[currentIndex]}
-        alt={`Slide ${currentIndex + 1}`}
-        className="carousel-image"
-      /> */}
       <img
         src={images[currentIndex]}
         alt={`Slide ${currentIndex + 1}`}

@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import CardDrop from "../components/CardDrop";
+import FormArticle from "../components/FormArticle";
 
 function DropsPage() {
   const [products, setProducts] = useState([]);
   const [productFilter, setProductFilter] = useState(products);
   const [choiceBrand, setBrand] = useState("");
+
+  const userData = JSON.parse(sessionStorage.getItem("user"));
+  const adminData = JSON.parse(sessionStorage.getItem("admin"));
+  const admin = adminData ? adminData.user.role === "admin" : userData;
 
   const getAllProductDrop = () => {
     fetch("http://localhost:1234/all/drops").then(async (res) => {
@@ -39,7 +44,7 @@ function DropsPage() {
       <div className="all-drops m-4">
         <div className="is-flex is-justify-content-space-between">
           <div className="top-bar">
-            <h1 className="title is-4">Tous les derniers hot drops</h1>
+            <h1 className="title is-3">Tous les derniers hot drops</h1>
           </div>
           <div className="div_filter_brand">
             <input
@@ -54,7 +59,7 @@ function DropsPage() {
           </div>
         </div>
         <div className="wrapper columns is-flex-wrap-wrap	is-justify-content-center	m-3">
-          {productFilter.map((product) => {
+          {products.map((product) => {
             return (
               <CardDrop
                 key={product._id}
@@ -68,6 +73,12 @@ function DropsPage() {
             );
           })}
         </div>
+        <hr />
+        {admin ? (
+          <div className="form p-4" id="border-form">
+            <FormArticle />
+          </div>
+        ) : null}
       </div>
     </div>
   );

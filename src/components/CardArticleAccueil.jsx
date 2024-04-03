@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 
 function CardArticleAccueil({ imageUrl, category, name, content, date, url }) {
   return (
-    <div className="card card-article is-flex mb-4" id="card-border">
+    <div className="card is-flex mb-4" id="card-border">
       <div className="section-article-img">
-        <Link to="/products">
+        <Link to="/product">
           <img className="" src={imageUrl} alt="Placeholder image" />
         </Link>
       </div>

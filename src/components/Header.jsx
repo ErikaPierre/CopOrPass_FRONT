@@ -3,10 +3,12 @@ import { FaRegUser } from "react-icons/fa";
 
 function Header() {
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const userData = JSON.parse(sessionStorage.getItem("user"));
+  const adminData = JSON.parse(sessionStorage.getItem("admin"));
 
   const handleLogout = async () => {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("admin");
     navigate("/connexion");
   };
 
@@ -23,14 +25,14 @@ function Header() {
       </div>
 
       <nav
-        class="navbar is-normal"
+        className="navbar is-normal"
         role="navigation"
         aria-label="main navigation"
       >
-        <div class="navbar-brand">
+        <div className="navbar-brand">
           <a
             role="button"
-            class="navbar-burger"
+            className="navbar-burger"
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample"
@@ -41,68 +43,80 @@ function Header() {
           </a>
         </div>
 
-        <div id="navbarBasicExample" class="navbar-menu is-size-4">
-          <div class="navbar-start">
-            <Link to="/" class="navbar-item has-text-white" id="menu-item">
+        <div id="navbarBasicExample" className="navbar-menu is-size-4">
+          <div className="navbar-start">
+            <Link to="/" className="navbar-item has-text-white" id="menu-item">
               Accueil
             </Link>
-            <Link
+            {/* <Link
               to="/galerie"
               class="navbar-item has-text-white"
               id="menu-item"
             >
               Galerie
-            </Link>
+            </Link> */}
             <Link
               to="/releases"
-              class="navbar-item has-text-white"
+              className="navbar-item has-text-white"
               id="menu-item"
             >
               Releases
             </Link>
-            <Link to="/drops" class="navbar-item has-text-white" id="menu-item">
+            <Link
+              to="/drops"
+              className="navbar-item has-text-white"
+              id="menu-item"
+            >
               Drops
             </Link>
 
-            <div class="navbar-item has-dropdown is-hoverable">
-              <Link to="#" class="navbar-link has-text-white" id="menu-item">
+            <div className="navbar-item has-dropdown is-hoverable">
+              <Link
+                to="#"
+                className="navbar-link has-text-white"
+                id="menu-item"
+              >
                 A propos
               </Link>
-              <div class="navbar-dropdown">
-                <Link to="#" class="navbar-item">
+              <div className="navbar-dropdown">
+                <Link to="#" className="navbar-item">
                   Qui sommes-nous ?
                 </Link>
-                <Link to="#" class="navbar-item">
+                <Link to="#" className="navbar-item">
                   Opportunités
                 </Link>
-                <Link to="#" class="navbar-item">
+                <Link to="#" className="navbar-item">
                   Contact
                 </Link>
-                <hr class="navbar-divider" />
-                <Link to="" class="navbar-item">
+                <hr className="navbar-divider" />
+                <Link to="" className="navbar-item">
                   Un problème ? Dis-le nous ici
                 </Link>
               </div>
             </div>
           </div>
 
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons mr-4">
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons mr-4">
                 {userData ? (
-                  <button
-                    class="button is-info is-light"
-                    onClick={handleLogout}
-                  >
-                    Deconnexion
-                  </button>
+                  <>
+                    <Link to="/likes">
+                      <button className="button is-rounded is-info is-danger is-dark mr-2">
+                        Mes sneakyLikes
+                      </button>
+                    </Link>
+                    <button
+                      className="button is-info is-light"
+                      onClick={handleLogout}
+                    >
+                      Deconnexion
+                    </button>
+                  </>
                 ) : (
                   <>
-                    <Link to="/inscription">
-                      <button class="button is-info">Inscription</button>
-                    </Link>
                     <Link to="/connexion">
-                      <button class="button is-info is-light">
+                      <button className="button is-info is-light">
                         <FaRegUser />
                       </button>
                     </Link>

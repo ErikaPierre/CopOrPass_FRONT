@@ -5,12 +5,13 @@ import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
-import GaleriePage from "./pages/GaleriePage.jsx";
+// import GaleriePage from "./pages/GaleriePage.jsx";
 import ConnexionPage from "./pages/ConnexionPage.jsx";
 import InscriptionPage from "./pages/InscriptionPage.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import ReleasePage from "./pages/ReleasePage.jsx";
-import DropsPage from "./pages/DropsPage.jsx"
+import DropsPage from "./pages/DropsPage.jsx";
+import LikePage from "./pages/LikePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,10 +31,10 @@ const router = createBrowserRouter([
         path: "/inscription",
         element: <InscriptionPage />,
       },
-      {
-        path: "/galerie",
-        element: <GaleriePage />,
-      },
+      // {
+      //   path: "/galerie",
+      //   element: <GaleriePage />,
+      // },
       {
         path: "/drops",
         element: <DropsPage />,
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/releases",
         element: <ReleasePage />,
+      },
+      {
+        path: "/like",
+        element: <LikePage />,
       },
     ],
   },

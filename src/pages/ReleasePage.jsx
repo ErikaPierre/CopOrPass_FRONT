@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import CardRelease from "../components/CardRelease";
+import FormArticle from "../components/FormArticle";
 
 function ReleasePage() {
+  const userData = JSON.parse(sessionStorage.getItem("user"));
+  const adminData = JSON.parse(sessionStorage.getItem("admin"));
+  const admin = adminData ? adminData.user.role === "admin" : userData;
+
   const [releases, setReleases] = useState([]);
 
   const getAllReleases = () => {
@@ -20,7 +25,7 @@ function ReleasePage() {
     <div className="releases  mb-4">
       <div className="is-flex is-justify-content-center p-4 mt-4 mb-4">
         <h1 className="title is-3">
-          &#129327; Toutes les paires à venir &#129327;
+          &#129327; &#128680; Toutes les paires à venir &#128680; &#129327;
         </h1>
       </div>
       <div className="wrapper columns is-flex-wrap-wrap	is-justify-content-center	">
@@ -37,6 +42,12 @@ function ReleasePage() {
           );
         })}
       </div>
+      <hr />
+      {admin ? (
+        <div className="form p-4 m-4" id="border-form">
+          <FormArticle />
+        </div>
+      ) : null}
     </div>
   );
 }

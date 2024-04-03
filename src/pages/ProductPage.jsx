@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Comment from "../components/Comment";
 
 function ProductPage() {
   const [progress, setProgress] = useState(0);
@@ -19,9 +20,9 @@ function ProductPage() {
   }
 
   return (
-    <div className="product is-flex-direction-column mb-3" id="page_product">
+    <div className="product is-flex-direction-column" id="page_product">
       <div className="product_s">
-        <div className="text-product is-size-4	has-text-weight-bold	mt-3 mb-3">
+        <div className="text-product is-size-3	has-text-weight-bold	mt-3 mb-3">
           <span>
             L’un des nombreux modèles imaginés par Tinker Hatfield renouvelle
             ses propositions à travers une Nike Air Max 1 Burgundy Crush.
@@ -64,7 +65,7 @@ function ProductPage() {
         <div className="like-dislike is-flex-direction-column is-justify-content-space-around mt-6 mb-6">
           <p>👟 {totalVotes} votes </p>
           <progress
-            class="progress is-info"
+            className="progress is-info"
             value={progress}
             min="0"
             max="100"
@@ -89,6 +90,10 @@ function ProductPage() {
             </div>
           </div>
         </div>
+      </div>
+      <hr />
+      <div className="comment ">
+        <Comment/>
       </div>
     </div>
   );
