@@ -8,7 +8,7 @@ function Footer() {
   };
 
   return (
-    <div className="columns has-background-black has-text-white p-3 mt-6">
+    <div className="columns has-background-black has-text-white p-3 mt-5">
       <div className="column logo is-flex is-justify-content-center	is-align-items-center	">
         <a href="http://localhost:5173/">
           <img src="src/assets/Logo_Site/SneakyLogo.png" width="180" />

@@ -6,6 +6,8 @@ function Header() {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
 
+  const name = userData ? userData.user.userName : "";
+
   const handleLogout = async () => {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("admin");
@@ -48,13 +50,13 @@ function Header() {
             <Link to="/" className="navbar-item has-text-white" id="menu-item">
               Accueil
             </Link>
-            {/* <Link
+            <Link
               to="/galerie"
-              class="navbar-item has-text-white"
+              className="navbar-item has-text-white"
               id="menu-item"
             >
               Galerie
-            </Link> */}
+            </Link>
             <Link
               to="/releases"
               className="navbar-item has-text-white"
@@ -101,11 +103,19 @@ function Header() {
               <div className="buttons mr-4">
                 {userData ? (
                   <>
-                    <Link to="/likes">
-                      <button className="button is-rounded is-info is-danger is-dark mr-2">
-                        Mes sneakyLikes
+                    <p>{name}</p>
+                    {adminData ? (
+                      <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">
+                        <Link to="/users">Utilisateurs</Link>
                       </button>
-                    </Link>
+                    ) : (
+                      <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">
+                        <Link to="/like" id="btn-SnkLks">
+                          Mes sneakyLikes
+                        </Link>
+                      </button>
+                    )}
+
                     <button
                       className="button is-info is-light"
                       onClick={handleLogout}

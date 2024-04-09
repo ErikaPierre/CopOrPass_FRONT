@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Comment from "../components/Comment";
 
 function ProductPage() {
+  const [article, setArticle] = useState([]);
   const [progress, setProgress] = useState(0);
   const [totalVotes, setTotalVotes] = useState(0);
+  const { productId } = useParams();
 
   function incrementProgress() {
     if (progress < 100) {
@@ -19,47 +22,44 @@ function ProductPage() {
     }
   }
 
+  const getOneProduct = () => {
+    fetch(`http://localhost:1234/products/get-one/${productId}`).then(
+      async (res) => {
+        const data = await res.json();
+        console.log(data.product);
+        setArticle(data.product);
+      }
+    );
+  };
+  useEffect(() => {
+    getOneProduct();
+  });
+
   return (
-    <div className="product is-flex-direction-column" id="page_product">
-      <div className="product_s">
+    <div className="product is-flex is-flex-direction-column" id="page_product">
+      <div className="product_s ">
         <div className="text-product is-size-3	has-text-weight-bold	mt-3 mb-3">
-          <span>
-            L’un des nombreux modèles imaginés par Tinker Hatfield renouvelle
-            ses propositions à travers une Nike Air Max 1 Burgundy Crush.
-          </span>
+          <span>{article.title}</span>
         </div>
 
         <div className="img-product">
-          <img src="src/assets/Articles/Produit_1.jpeg" alt="" />
+          <img src={article.image} alt="" />
         </div>
 
         <div className="title-product mt-3 mb-6">
-          <h2 className="title is-2 ">Nike Air Max 1 Burgundy Crush</h2>
+          <h2 className="title is-2 ">{article.name}</h2>
         </div>
 
         <div className="content-product mt-3 mb-3">
-          <p>
-            Ce nouveau design dévoilé par Nike s’articule en trois phases. Tout
-            d’abord, des empiècements en cuir orange recouvrent le upper alors
-            que du daim bordeaux entoure l’ensemble. En guise de fond, on
-            retrouve une base immaculée de façon à bien mettre en valeur la
-            composition bicolore.
-          </p>
+          <p>{article.content}</p>
         </div>
 
         <div className="img-product">
-          <img src="src/assets/Articles/Produit_1_1.jpeg" alt="" />
+          <img src={article.image} alt="" />
         </div>
 
         <div className="content-product mt-3 mb-3">
-          <p>
-            La Nike Air Max 1 Burgundy Crush projette une sortie cette année
-            auprès de différents revendeurs et bien évidement sur
-            <a href="https://www.nike.com/fr/?CP=EUNS_AFF_AWIN_FR_13430_AffiliatePromotions_&utm_source=AffiliatePromotions&utm_medium=affiliate&utm_campaign=13430&utm_content=&sv1=affiliate&sv_campaign_id=13430&awc=16328_1710802448_129620fdc04d2c4385e3fb727f4148e6#038;awinaffid=163046&#038;clickref=&#038;p=https://www.nike.com/fr/w/nouveau-air-max-chaussures-3n82yza6d8hzy7ok">
-              Nike.com.
-            </a>
-            Le tarif, quant à lui, sera autour de 160€.
-          </p>
+          <p>{article.text}</p>
         </div>
 
         <div className="like-dislike is-flex-direction-column is-justify-content-space-around mt-6 mb-6">
@@ -93,7 +93,7 @@ function ProductPage() {
       </div>
       <hr />
       <div className="comment ">
-        <Comment/>
+        <Comment />
       </div>
     </div>
   );

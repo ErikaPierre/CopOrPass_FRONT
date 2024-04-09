@@ -6,66 +6,46 @@ import CardArticleAccueil from "../components/CardArticleAccueil";
 import CardCdcAccueil from "../components/CardCdcAccueil";
 import Carousel from "../components/CarouselAccueil";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import TableUsers from "../components/TableUsers";
 
 const sneakersTab = [
   {
-    imageUrl: "src/assets/Cdc/AF1.jpg",
+    imageUrl: "src/assets/Cdc/AF1.jpeg",
     name: "Air force 1 - Triple White",
     brand: "Nike",
     logo: "src/assets/Logos_Marques/nike-logo.webp",
-    // date: "08/02/2024",
   },
   {
     imageUrl: "src/assets/Cdc/AF1_BR.jpg",
     name: "Air force 1 - Cheery Line",
     brand: "Nike",
     logo: "src/assets/Logos_Marques/nike-logo.webp",
-    // date: "14/02/2024",
   },
   {
     imageUrl: "src/assets/Cdc/Jordan_1.jpg",
     name: "Air Jordan High - Baby Blue ",
     brand: "Jordan",
     logo: "src/assets/Logos_Marques/logo-jordan.webp",
-    // date: "23/02/2024",
-  },
-];
-
-const sneakersArticles = [
-  {
-    imageUrl: "src/assets/Articles/Produit_1.jpeg",
-    category: "SNEAKERS",
-    name: "Nike Air Max 1 Burgundy Crush",
-    url: "",
-    content:
-      "Ce nouveau design dévoilé par Nike s’articule en trois phases. Tout d’abord, des empiècements en cuir orange recouvrent le upper alors que du daim bordeaux entoure l’ensemble. En guise de fond, on retrouve une base immaculée de façon à bien mettre en valeur la composition bicolore.",
-    date: "17/04/2024",
-  },
-  {
-    imageUrl: "src/assets/Articles/Produit_2.jpeg",
-    name: "Nike Air Pegasus 2K5 Bicoastal",
-    category: "SNEAKERS",
-    url: "",
-    content:
-      "Très appréciée dans les années Y2K, la Air Pegasus s’offre une mise à jour pour son come-back. Renommée « Air Peg 2K5 », celle-ci présente différents matériaux illustrés à l’aide d’un mélange bicolore vert et blanc cassé. Dans les détails, le heeltab rappelle les origines de son design tandis que la languette fait écho à son renouveau. À noter que la version moderne comprend désormais un coussin d’air sur l’avant-pied.",
-    date: "17/04/2024",
-  },
-  {
-    imageUrl: "src/assets/Articles/Produit_3.jpeg",
-    name: "Nike Air Max Dn Triple Black.",
-    url: "",
-    category: "SNEAKERS",
-    content:
-      "Les fans des silhouettes monochromes seront ravis d’apprendre qu’une version full black arrive prochainement. Au-delà de son enveloppe noire, celle-ci présente des branding Nike Dn classiques ainsi que différents pods Dynamic Air semi-translucide. Ces derniers sont d’ailleurs la seule différence notable avec la Air Max Dn Black.",
-    date: "17/04/2024",
   },
 ];
 
 function HomePage() {
   const [sneakers, setSneakers] = useState(sneakersTab);
-  const [articles, setArticles] = useState(sneakersArticles);
+  const [articles, setArticles] = useState([]);
+
+  const getAllArticles = () => {
+    fetch("http://localhost:1234/products/all").then(async (res) => {
+      const data = await res.json();
+      console.log(data.products);
+      setArticles(data.products);
+    });
+  };
+
+  useEffect(() => {
+    getAllArticles();
+  }, []);
 
   return (
     <>
@@ -220,56 +200,123 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="section-carrousel p-6 has-background-info-light	mb-6">
-          <h3 className="titre-intro-2 has-text-info is-size-3 has-text-weight-bold	mt-2 mb-4">
+        <div>
+          <h3 className="title is-3 has-text-info  has-text-weight-bold mt-6">
             &#128293; LAST HOT DROPS &#128293;
           </h3>
+        </div>
+        <div className="section-carrousel p-2 has-background-info-light	mb-6">
           <Carousel />
         </div>
 
         <div className=" is-flex has-text-black ml-3 mb-5">
           <div className="section-article_2">
-            {articles.map((article) => {
-              return (
-                <CardArticleAccueil
-                  key={article.name}
-                  imageUrl={article.imageUrl}
-                  category={article.category}
-                  url={article.url}
-                  name={article.name}
-                  content={article.content}
-                  date={article.date}
-                />
-              );
-            })}
+            {articles &&
+              articles.map((article) => {
+                return (
+                  <Link to={`/product/${article._id}`} id="product-item">
+                    <CardArticleAccueil
+                      key={article.name}
+                      image={article.image}
+                      category={article.category}
+                      url={article.url}
+                      name={article.name}
+                      content={article.content}
+                      date={article.date}
+                    />
+                  </Link>
+                );
+              })}
           </div>
-          {/* <h1 className="title is-5">Nos marques</h1>
-          <div class="grid is-flex">
-            <div class="cell">
-              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+        </div>
+
+        <div className="remerciement p-4	">
+          <h1 className="title is-3  mt-6">Nos marques collaboratrices</h1>
+          <p className="remerciement-text is-size-4 has-text-justified	">
+            Nous sommes profondément reconnaissants pour votre confiance en
+            notre vision et notre mission. Votre contribution à notre plateforme
+            a été un élément clé dans la création d'une expérience enrichissante
+            pour nos utilisateurs. Chaque collaboration avec vos marques a
+            enrichi notre offre et nous a permis d'offrir des solutions toujours
+            plus innovantes et pertinentes à notre communauté. Nous apprécions
+            grandement votre partenariat et sommes impatients de poursuivre
+            cette collaboration fructueuse dans les années à venir.
+          </p>
+
+          <div className="columns is-multiline	m-5">
+            <div className="column  ">
+              <a href="https://www.nike.com/fr/">
+                <img
+                  src="src/assets/Logos_Marques/nike-logo.webp"
+                  alt="Logo Nike"
+                />
+              </a>
             </div>
-            <div class="cell">
-              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            <div className="column ">
+              <a href="https://www.nike.com/fr/jordan">
+                <img
+                  src="src/assets/Logos_Marques/logo-jordan.webp"
+                  alt="Logo Jordan"
+                />
+              </a>
             </div>
-            <div class="cell">
-              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            <div className="column ">
+              <a href="https://www.converse.com/fr">
+                <img
+                  src="src/assets/Logos_Marques/Converse-logo-500x281.webp"
+                  alt="Logo Converse"
+                />
+              </a>
             </div>
-            <div class="cell">
-              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            <div className="column ">
+              <a href="https://eu.puma.com/fr/fr/home">
+                <img
+                  src="src/assets/Logos_Marques/logo-puma.webp"
+                  alt="Logo Puma"
+                />
+              </a>
             </div>
-            <div class="cell">
-              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            <div className="column ">
+              <a href="https://www.vans.fr/">
+                <img
+                  src="src/assets/Logos_Marques/logo-vans.webp"
+                  alt="Logo Vans"
+                />
+              </a>
             </div>
-            <div class="cell">
-              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            <div className="column ">
+              <a href="https://www.newbalance.fr/fr">
+                <img
+                  src="src/assets/Logos_Marques/new-balance-logo.webp"
+                  alt="Logo New Balance"
+                />
+              </a>
             </div>
-            <div class="cell">
-              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            <div className="column ">
+              <a href="https://www.reebok.eu/fr-fr/">
+                <img
+                  src="src/assets/Logos_Marques/Reebok_Logo.webp"
+                  alt="Logo Reebok"
+                />
+              </a>
             </div>
-            <div class="cell">
-              <img src="src/assets/Logos_Marques/logo-jordan.webp" alt="" />
+            <div className="column ">
+              <a href="https://www.adidas.fr/">
+                <img
+                  src="src/assets/Logos_Marques/adidas-logo.webp"
+                  alt="Logo Adidas"
+                />
+              </a>
             </div>
-          </div> */}
+            <div className="column ">
+              <a href="https://www.crocs.fr/">
+                <img
+                  src="src/assets/Logos_Marques/Crocs-Logo.webp"
+                  alt="Logo Crocs"
+                />
+              </a>
+            </div>
+          </div>
         </div>
       </main>
     </>

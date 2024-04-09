@@ -37,10 +37,8 @@ p {
   align-items: center;
 }
 
-.product_s {
-  width: 1200px;
-}
 
+/* borders */
 #border-img {
   border: 3px dotted black;
   padding: 10px;
@@ -57,8 +55,39 @@ p {
   border-bottom: 2px dotted #007acc;
 }
 
+#border-form {
+  border: 2px solid #007acc;
+}
+
+#card-border:hover {
+  border: 2px solid #007acc;
+}
+
+#card-border-release {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+#card-border-release:hover {
+  background-color: #99d6ff39;
+}
+
+/* sizes */
+.product_s {
+  width: 1000px;
+}
+
 #size-photo {
   width: 100%;
+}
+
+.card-accueil {
+  width: 400px;
+  gap: 15px;
+}
+
+.card-release {
+  width: 400px;
 }
 
 .navbar-menu {
@@ -75,36 +104,12 @@ p {
   font-weight: bold;
 }
 
-.card-accueil {
-  width: 400px;
-  gap: 15px;
+#product-item {
+  color: black;
 }
 
-.card-release {
-  width: 400px;
-}
-
-#card-border:hover {
-  border: 2px solid #007acc;
-}
-
-#border-form {
-  border: 2px solid #007acc;
-}
-
-#card-border-release:hover {
-  background-color: #99d6ff39;
-  -webkit-transform: rotate(-5deg);
-  transform: rotate(-5deg);
-}
-
-#card-border-release {
-  border: 1px solid black;
-  border-radius: 10px;
-}
 
 /* section-article_1 */
-
 #red {
   color: red;
   text-decoration: underline;
@@ -149,6 +154,7 @@ p {
   right: -40px;
 }
 
-.box {
-  width: 150px;
+/* btn css*/
+#btn-SnkLks{
+  color: white;
 }

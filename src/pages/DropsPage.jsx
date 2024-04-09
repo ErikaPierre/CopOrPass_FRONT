@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import CardDrop from "../components/CardDrop";
-import FormArticle from "../components/FormArticle";
+import FormDrop from "../components/FormDrop";
 
 function DropsPage() {
   const [products, setProducts] = useState([]);
-  const [productFilter, setProductFilter] = useState(products);
+  const [productFilter, setProductFilter] = useState([]);
   const [choiceBrand, setBrand] = useState("");
 
   const userData = JSON.parse(sessionStorage.getItem("user"));
@@ -13,28 +13,37 @@ function DropsPage() {
   const admin = adminData ? adminData.user.role === "admin" : userData;
 
   const getAllProductDrop = () => {
-    fetch("http://localhost:1234/all/drops").then(async (res) => {
+    fetch("http://localhost:1234/drops/all").then(async (res) => {
       const data = await res.json();
       console.log(data.drops);
       setProducts(data.drops);
+      setProductFilter(data.drops);
     });
   };
+
+  const filterProductsByBrand = () => {
+    const filteredProducts = products.filter((product) =>
+      product.brand
+        .map((brand) => brand.toLowerCase())
+        .includes(choiceBrand.toLowerCase())
+    );
+    setProductFilter(filteredProducts);
+  };
+
+  // const filterProductsByBrand = () => {
+  //   const filteredProducts = products.filter(
+  //     (product) =>
+  //       Array.isArray(product.brand) && // Vérifie si product.brand est un tableau
+  //       product.brand
+  //         .map((brand) => brand.toLowerCase())
+  //         .includes(choiceBrand.toLowerCase())
+  //   );
+  //   setProductFilter(filteredProducts);
+  // };
 
   useEffect(() => {
     getAllProductDrop();
   }, []);
-
-  function filteredProduct(e) {
-    e.preventDefault();
-    setProductFilter(
-      products.filter((product) =>
-        product.brand
-          .map((brand) => brand.toLowerCase())
-          .includes(choiceBrand.toLowerCase())
-      )
-    );
-    setBrand("");
-  }
 
   return (
     <div className="drops is-flex">
@@ -46,20 +55,21 @@ function DropsPage() {
           <div className="top-bar">
             <h1 className="title is-3">Tous les derniers hot drops</h1>
           </div>
-          <div className="div_filter_brand">
+          <div className="div_filter_brand is-flex">
             <input
+              className="input is-focused"
               type="text"
               placeholder="search ..."
               value={choiceBrand}
               onChange={(e) => setBrand(e.target.value)}
             />
-            <button className="button-filter" onClick={filteredProduct}>
+            <button className="button-filter" onClick={filterProductsByBrand}>
               Chercher
             </button>
           </div>
         </div>
         <div className="wrapper columns is-flex-wrap-wrap	is-justify-content-center	m-3">
-          {products.map((product) => {
+          {productFilter.map((product) => {
             return (
               <CardDrop
                 key={product._id}
@@ -76,7 +86,7 @@ function DropsPage() {
         <hr />
         {admin ? (
           <div className="form p-4" id="border-form">
-            <FormArticle />
+            <FormDrop />
           </div>
         ) : null}
       </div>

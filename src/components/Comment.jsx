@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 
 function Comment() {
+  const userData = JSON.parse(sessionStorage.getItem("user"));
+  const adminData = JSON.parse(sessionStorage.getItem("admin"));
+
   const [comments, setComments] = useState([]);
 
   const [userName, setUserName] = useState("");
@@ -42,55 +45,65 @@ function Comment() {
 
   return (
     <>
-      <div className="Comment-list is-flex is-justify-content-space-between	">
-        <div className="form">
-          <form onSubmit={createComment} className="comment-form">
-            <div className="field">
-              <label className="label">Name</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                />
+      <div className="Comment-list">
+        <div>
+          {userData || adminData ? (
+            <form onSubmit={createComment} className="comment-form">
+              <div className="field">
+                <label className="label">Name</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="field">
-              <label className="label">Titre</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  required
-                />
+              <div className="field">
+                <label className="label">Titre</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="field">
-              <label className="label">Message</label>
-              <div className="control">
-                <textarea
-                  className="textarea"
-                  type="text"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  required
-                ></textarea>
+              <div className="field">
+                <label className="label">Message</label>
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    type="text"
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    required
+                  ></textarea>
+                </div>
               </div>
-            </div>
 
-            <button type="submit" className="button is-info is-outlined">
-              Envoyer
-            </button>
-          </form>
+              <button type="submit" className="button is-info is-outlined">
+                Envoyer
+              </button>
+            </form>
+          ) : null}
         </div>
 
-        <div className="list has-background-info	">
-          Il faut afficher la liste des commentaires ici
+        <div className="list ">
+          {comments.map((comment) => {
+            return (
+              <div key={comment._id} className="box ">
+                <p className="title is-4 ">{comment.userName}</p>
+                <p className="title is-5 ">{comment.title}</p>
+                <p className="title is-6 ">{comment.content}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>

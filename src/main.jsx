@@ -5,13 +5,14 @@ import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
-// import GaleriePage from "./pages/GaleriePage.jsx";
+import GaleriePage from "./pages/GaleriePage.jsx";
 import ConnexionPage from "./pages/ConnexionPage.jsx";
 import InscriptionPage from "./pages/InscriptionPage.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import ReleasePage from "./pages/ReleasePage.jsx";
 import DropsPage from "./pages/DropsPage.jsx";
 import LikePage from "./pages/LikePage.jsx";
+import UserPage from "./pages/UserPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,20 +28,25 @@ const router = createBrowserRouter([
         path: "/connexion",
         element: <ConnexionPage />,
       },
+
       {
         path: "/inscription",
         element: <InscriptionPage />,
       },
-      // {
-      //   path: "/galerie",
-      //   element: <GaleriePage />,
-      // },
+      {
+        path:"/users",
+        element: <UserPage/>
+      },
+      {
+        path: "/galerie",
+        element: <GaleriePage />,
+      },
       {
         path: "/drops",
         element: <DropsPage />,
       },
       {
-        path: "/product",
+        path: "/product/:productId",
         element: <ProductPage />,
       },
       {

@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
 import CardRelease from "../components/CardRelease";
-import FormArticle from "../components/FormArticle";
+import FormRelease from "../components/FormRelease";
+import { useEffect, useState } from "react";
 
 function ReleasePage() {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
   const admin = adminData ? adminData.user.role === "admin" : userData;
-
   const [releases, setReleases] = useState([]);
 
   const getAllReleases = () => {
-    fetch("http://localhost:1234/all/releases").then(async (res) => {
+    fetch("http://localhost:1234/releases/all").then(async (res) => {
       const data = await res.json();
       console.log(data.releases);
       setReleases(data.releases);
@@ -33,6 +32,7 @@ function ReleasePage() {
           return (
             <CardRelease
               key={release._id}
+              id={release._id}
               image={release.image}
               dateRelease={release.dateRelease}
               brand={release.brand}
@@ -45,7 +45,7 @@ function ReleasePage() {
       <hr />
       {admin ? (
         <div className="form p-4 m-4" id="border-form">
-          <FormArticle />
+          <FormRelease />
         </div>
       ) : null}
     </div>
