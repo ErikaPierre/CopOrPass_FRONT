@@ -103,9 +103,9 @@ function CardRelease({ id, image, dateRelease, brand, modeleName, color }) {
           <img src={image} alt="" />
         </figure>
       </div>
-      {/* <div className="title-card is-size-4 has-text-centered p-3">
+      <div className="title-card is-size-4 has-text-centered p-3">
         <strong>{brand}</strong>
-      </div> */}
+      </div> 
       <div className="card-content">
         <div className="media-content">
           <p className="title is-5">{modeleName}</p>

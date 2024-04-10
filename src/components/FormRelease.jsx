@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 
 function FormRelease() {
-  const [date, setDate] = useState("");
+  const [dateRelease, setDateRelease] = useState("");
   const [brand, setBrand] = useState("");
   const [modeleName, setModeleName] = useState("");
   const [color, setColor] = useState("");
-  const [image, setImage] = useState(undefined);
+  const [image, setImage] = useState([]);
 
   const createProduct = async (e) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    for (const file of image) {
+      formData.append("image", file);
+    }
+    formData.append("dateRelease", dateRelease);
+    formData.append("brand", brand);
+    formData.append("modeleName", modeleName);
+    formData.append("color", color);
+
     fetch("http://localhost:1234/releases/create", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        image: image,
-        dateRelease: date,
-        brand: brand,
-        modeleName: modeleName,
-        color: color,
-      }),
+      body: formData,
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         window.location.reload();
       })
       .catch((error) => {
@@ -31,7 +34,7 @@ function FormRelease() {
   };
 
   const handleImage = (e) => {
-    setImage(e.target.files[0]);
+    setImage(e.target.files);
   };
 
   return (
@@ -42,9 +45,9 @@ function FormRelease() {
           <div className="control">
             <input
               className="input"
-              type="text"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
+              type="date"
+              value={dateRelease}
+              onChange={(e) => setDateRelease(e.target.value)}
               required
             />
           </div>
@@ -94,9 +97,9 @@ function FormRelease() {
             <input
               className="file-input"
               type="file"
-              name="resume"
-              value={image}
+              name="image"
               onChange={handleImage}
+              required
             />
             <span className="file-cta">
               <span className="file-icon">
@@ -112,7 +115,7 @@ function FormRelease() {
 
         <div className="field is-grouped is-pulled-right	">
           <div className="control">
-            <button type="submit" className="button is-link">
+            <button onClick={createProduct} className="button is-link">
               Submit
             </button>
           </div>

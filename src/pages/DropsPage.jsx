@@ -23,9 +23,8 @@ function DropsPage() {
 
   const filterProductsByBrand = () => {
     const filteredProducts = products.filter((product) =>
-      product.brand
-        .map((brand) => brand.toLowerCase())
-        .includes(choiceBrand.toLowerCase())
+      product.brand === choiceBrand
+        // .includes(choiceBrand.toLowerCase())
     );
     setProductFilter(filteredProducts);
   };
@@ -73,6 +72,7 @@ function DropsPage() {
             return (
               <CardDrop
                 key={product._id}
+                id={product._id}
                 image={product.image}
                 date={product.date}
                 brand={product.brand}

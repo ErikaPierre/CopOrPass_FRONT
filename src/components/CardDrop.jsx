@@ -3,7 +3,7 @@ import { ImCross } from "react-icons/im";
 import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import { ImPencil2 } from "react-icons/im";
 
-function CardDrop({ image, brand, modeleName, color, price }) {
+function CardDrop({ id, image, brand, modeleName, color, price }) {
   const [counter, setCounter] = useState(0);
   const [discounter, setDiscounter] = useState(0);
   const [drops, setDrops] = useState([]);
@@ -20,25 +20,25 @@ function CardDrop({ image, brand, modeleName, color, price }) {
     setDiscounter(discounter + 1);
   }
 
+  function editDrop(id) {
+    fetch(`http://localhost:1234/drops/update/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+    }).then(async (res) => {
+      const data = await res.json();
+      console.log(data);
+      setDrops(data.drops);
+      window.location.reload();
+    });
+  }
+
   function deleteDrop(id) {
     fetch(`http://localhost:1234/drops/remove/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     }).then(async (res) => {
       const data = await res.json();
-      console.log(data.drops);
-      setDrops(data.drops);
-      window.location.reload();
-    });
-  }
-
-  function editDrop() {
-    fetch(`http://localhost:1234/drops/update/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-    }).then(async (res) => {
-      const data = await res.json();
-      console.log(data.drops);
+      console.log(data);
       setDrops(data.drops);
       window.location.reload();
     });
@@ -63,7 +63,7 @@ function CardDrop({ image, brand, modeleName, color, price }) {
           <div>
             <button
               onClick={() => {
-                likeDrop(id);
+                likeDrop();
               }}
               id="border-btn-release"
             >

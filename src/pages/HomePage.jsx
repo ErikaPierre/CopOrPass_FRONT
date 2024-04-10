@@ -8,7 +8,6 @@ import Carousel from "../components/CarouselAccueil";
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import TableUsers from "../components/TableUsers";
 
 const sneakersTab = [
   {

@@ -27,8 +27,6 @@ function ConnexionPage() {
         sessionStorage.setItem("token", JSON.stringify(token));
         console.log(token);
         navigate('/')
-        // window.location.reload();
-
       })
       .catch((error) => console.error("Erreur lors de la connexion :", error));
   };

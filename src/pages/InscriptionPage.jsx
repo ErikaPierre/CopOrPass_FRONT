@@ -2,6 +2,7 @@ import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
 function InscriptionPage() {
+  const [userNameRegister, setUserNameRegister] = useState("");
   const [userEmailRegister, setUserEmailRegister] = useState("");
   const [userPasswordRegister, setUserPasswordRegister] = useState("");
 
@@ -9,10 +10,11 @@ function InscriptionPage() {
     event.preventDefault();
 
     try {
-      fetch("http://localhost:1234/auth/inscription", {
+      fetch("http://localhost:1234/user/inscription", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          name: userNameRegister,
           email: userEmailRegister,
           password: userPasswordRegister,
         }),
@@ -35,6 +37,23 @@ function InscriptionPage() {
             <input
               className="input"
               type="email"
+              placeholder="Nom utilisateur"
+              value={userNameRegister}
+              onChange={(e) => setUserNameRegister(e.target.value)}
+            />
+            <span className="icon is-small is-left">
+              <i className="fas fa-user"></i>
+            </span>
+            <span className="icon is-small is-right">
+              <i className="fas fa-check"></i>
+            </span>
+          </p>
+        </div>
+        <div className="field">
+          <p className="control has-icons-left has-icons-right">
+            <input
+              className="input"
+              type="email"
               placeholder="Email"
               value={userEmailRegister}
               onChange={(e) => setUserEmailRegister(e.target.value)}
@@ -52,7 +71,7 @@ function InscriptionPage() {
             <input
               className="input"
               type="password"
-              placeholder="Password"
+              placeholder="Mot de passe"
               value={userPasswordRegister}
               onChange={(e) => setUserPasswordRegister(e.target.value)}
             />
