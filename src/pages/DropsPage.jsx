@@ -22,23 +22,12 @@ function DropsPage() {
   };
 
   const filterProductsByBrand = () => {
-    const filteredProducts = products.filter((product) =>
-      product.brand === choiceBrand
-        // .includes(choiceBrand.toLowerCase())
+    const filteredProducts = products.filter(
+      (product) => product.brand === choiceBrand
+      // .includes(choiceBrand.toLowerCase())
     );
     setProductFilter(filteredProducts);
   };
-
-  // const filterProductsByBrand = () => {
-  //   const filteredProducts = products.filter(
-  //     (product) =>
-  //       Array.isArray(product.brand) && // Vérifie si product.brand est un tableau
-  //       product.brand
-  //         .map((brand) => brand.toLowerCase())
-  //         .includes(choiceBrand.toLowerCase())
-  //   );
-  //   setProductFilter(filteredProducts);
-  // };
 
   useEffect(() => {
     getAllProductDrop();

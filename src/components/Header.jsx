@@ -14,7 +14,6 @@ function Header() {
     navigate("/connexion");
   };
 
-
   return (
     <div>
       <div className="logo is-flex is-justify-content-center">
@@ -102,7 +101,7 @@ function Header() {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons mr-4">
-                {adminData  && adminData.user.role === 'admin' ?(
+                {adminData && adminData.user.role === "admin" ? (
                   <>
                     <p>{name}</p>
                     <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">
@@ -115,32 +114,30 @@ function Header() {
                       Deconnexion
                     </button>
                   </>
-                ):
-                  (userData && userData.user.role ==='user' ? (
-                    <>
-                      <p>{name}</p>
-                      <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">
-                        <Link to="/like" id="btn-SnkLks">
-                          Mes sneakyLikes
-                        </Link>
-                      </button>
-                      <button
-                        className="button is-info is-light"
-                        onClick={handleLogout}
-                      >
-                        Deconnexion
-                      </button>
-                    </>
-                  ):(
-<>
-                  <Link to="/connexion">
-                    <button className="button is-info is-light">
-                      <FaRegUser />
+                ) : userData && userData.user.role === "user" ? (
+                  <>
+                    <p id="name-user">{name}</p>
+                    <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">
+                      <Link to="/like" id="btn-SnkLks">
+                        Mes sneakyLikes
+                      </Link>
                     </button>
-                  </Link>
-                </>
-                  ))}
-                
+                    <button
+                      className="button is-info is-light"
+                      onClick={handleLogout}
+                    >
+                      Deconnexion
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/connexion">
+                      <button className="button is-info is-light">
+                        <FaRegUser />
+                      </button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

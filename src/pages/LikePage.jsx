@@ -1,4 +1,6 @@
 function LikePage() {
+  // fetch 
+  // 
   return (
     <>
       <div className="likes p-4">

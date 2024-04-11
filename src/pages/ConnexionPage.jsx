@@ -1,10 +1,12 @@
 import { jwtDecode } from "jwt-decode";
+import { enqueueSnackbar, useSnackbar } from "notistack";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function ConnexionPage() {
   const [userEmailLogin, setUserEmailLogin] = useState("");
   const [userPasswordLogin, setUserPasswordLogin] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
   const loginUser = (event) => {
@@ -26,7 +28,11 @@ function ConnexionPage() {
         sessionStorage.setItem("admin", JSON.stringify(decodedUser));
         sessionStorage.setItem("token", JSON.stringify(token));
         console.log(token);
-        navigate('/')
+        
+        enqueueSnackbar("Vous êtes bien connecté", {
+          variant: "success",
+        });
+        navigate("/");
       })
       .catch((error) => console.error("Erreur lors de la connexion :", error));
   };

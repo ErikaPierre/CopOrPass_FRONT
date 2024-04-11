@@ -13,6 +13,7 @@ import ReleasePage from "./pages/ReleasePage.jsx";
 import DropsPage from "./pages/DropsPage.jsx";
 import LikePage from "./pages/LikePage.jsx";
 import UserPage from "./pages/UserPage.jsx";
+import { SnackbarProvider } from "notistack";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,8 @@ const router = createBrowserRouter([
         element: <InscriptionPage />,
       },
       {
-        path:"/users",
-        element: <UserPage/>
+        path: "/users",
+        element: <UserPage />,
       },
       {
         path: "/galerie",
@@ -63,6 +64,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <SnackbarProvider>
+      <RouterProvider router={router} />
+    </SnackbarProvider>
   </React.StrictMode>
 );
