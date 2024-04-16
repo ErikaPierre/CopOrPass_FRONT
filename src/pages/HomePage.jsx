@@ -102,7 +102,7 @@ function HomePage() {
           </div>
           <div className="button-accueil is-flex is-justify-content-center mt-6 mb-6">
             <Link to="/galerie">
-              <button class="button is-info is-light">Voir galerie</button>
+              <button className="button is-info is-light">Voir galerie</button>
             </Link>
           </div>
         </div>

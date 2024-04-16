@@ -4,35 +4,68 @@ import Comment from "../components/Comment";
 
 function ProductPage() {
   const [article, setArticle] = useState([]);
-  const [progress, setProgress] = useState(0);
+  const [comments, setComments] = useState([]);
   const [totalVotes, setTotalVotes] = useState(0);
+  const [hasVoted, setHasVoted] = useState(false);
+
   const { productId } = useParams();
 
-  function incrementProgress() {
-    if (progress < 100) {
-      setProgress((prevProgress) => prevProgress + 1);
-      setTotalVotes((prevTotalVotes) => prevTotalVotes + 1);
-    }
-  }
+  const userData = JSON.parse(sessionStorage.getItem("user"));
+  const adminData = JSON.parse(sessionStorage.getItem("admin"));
 
-  function decrementProgress() {
-    if (progress > 0) {
-      setProgress((prevProgress) => prevProgress - 1);
-      setTotalVotes((prevTotalVotes) => prevTotalVotes + 1);
-    }
-  }
 
   const getOneProduct = () => {
     fetch(`http://localhost:1234/products/get-one/${productId}`).then(
       async (res) => {
         const data = await res.json();
         console.log(data.product.image);
+        console.log(data.product.comments);
         setArticle(data.product);
+        setComments(data.product.comments);
       }
     );
   };
+
+  function deleteComment(id) {
+    fetch(`http://localhost:1234/comments/delete/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        console.log(data.comments);
+        setComments(data.comments);
+        window.location.reload();
+      })
+      .catch((error) => console.error("Error:", error));
+  }
+
+  const handleVote = (votes) => {
+    if (!hasVoted) {
+      fetch(`http://localhost:1234/products/votes/${productId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setTotalVotes((prevTotalVotes) => prevTotalVotes + 1);
+          setHasVoted(true);
+        })
+        .catch((error) =>
+          console.error("Erreur lors de l'envoi des votes :", error)
+        );
+    }
+  };
+
   useEffect(() => {
     getOneProduct();
+
+    fetch(`http://localhost:1234/products/votes/${productId}`)
+      .then((res) => res.json())
+      .then((data) => setTotalVotes(data.product.votes))
+      .catch((error) =>
+        console.error("Erreur lors de la récupération des votes :", error)
+      );
   }, [productId]);
 
   return (
@@ -63,39 +96,74 @@ function ProductPage() {
             <p>{article.text}</p>
           </div>
 
+          <hr />
+
           <div className="like-dislike is-flex-direction-column is-justify-content-space-around mt-6 mb-6">
-            <p>👟 {totalVotes} votes </p>
+            <p>👟 {article.votes} votes </p>
             <progress
               className="progress is-info"
-              value={progress}
+              value={article.votes}
               min="0"
               max="100"
             ></progress>
 
-            <div className="vote-like-dislike is-flex is-justify-content-space-around mt-6 mb-6">
-              <div className="Cop is-flex is-align-items-center is-size-4 ">
-                <button
-                  className="button is-info is-size-4 mr-3"
-                  onClick={incrementProgress}
-                >
-                  <p className="is-size-4">COP 🔥</p>
-                </button>
+            {userData || adminData ? (
+              <div className="vote-like-dislike is-flex is-justify-content-space-around mt-6 mb-6">
+                <div className="Cop is-flex is-align-items-center is-size-4 ">
+                  <button
+                    className="button is-info is-size-4 mr-3"
+                    onClick={() => {
+                      handleVote(1);
+                    }}
+                  >
+                    <p className="is-size-4">COP 🔥</p>
+                  </button>
+                </div>
+                <div className="Drop is-flex is-align-items-center is-size-4 ">
+                  <button
+                    className="button is-danger is-size-4 mr-3"
+                    onClick={() => {
+                      handleVote(-1);
+                    }}
+                  >
+                    <p className="is-size-4">DROP 🗑️</p>
+                  </button>
+                </div>
               </div>
-              <div className="Drop is-flex is-align-items-center is-size-4 ">
-                <button
-                  className="button is-danger is-size-4 mr-3"
-                  onClick={decrementProgress}
-                >
-                  <p className="is-size-4">DROP 🗑️</p>
-                </button>
-              </div>
-            </div>
+            ) : (
+              <p>Pour pouvoir voter, connecte toi champion &#128527;</p>
+            )}
           </div>
         </div>
       )}
+
       <hr />
-      <div className="comment ">
-        <Comment />
+
+      <div className="comment p-4 is-flex">
+        <div className="mr-4">
+          <Comment />
+        </div>
+        <div className="list ">
+          {comments.map((comment) => {
+            return (
+              <div key={comment._id} className="box ">
+                <div className="btn-comm-del is-flex is-justify-content-space-between	">
+                  <p className="title is-4 ">{comment.userName}</p>
+                  {adminData && adminData.user.role === "admin" ? (
+                    <button
+                      onClick={() => {
+                        deleteComment(comment._id);
+                      }}
+                      className="delete"
+                    ></button>
+                  ) : null}
+                </div>
+                <p className="title is-5"> {comment.title}</p>
+                <p className="subtitle ">Message : {comment.content}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

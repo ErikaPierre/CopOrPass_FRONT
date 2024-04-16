@@ -4,19 +4,19 @@ function Comment() {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
 
-  const [comments, setComments] = useState([]);
+  // const [comments, setComments] = useState([]);
 
   const [userName, setUserName] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const getAllComments = () => {
-    fetch("http://localhost:1234/comments/all").then(async (res) => {
-      const data = await res.json();
-      console.log(data.comments);
-      setComments(data.comments);
-    });
-  };
+  // const getAllComments = () => {
+  //   fetch("http://localhost:1234/comments/all").then(async (res) => {
+  //     const data = await res.json();
+  //     console.log(data.comments);
+  //     setComments(data.comments);
+  //   });
+  // };
 
   const createComment = async (e) => {
     e.preventDefault();
@@ -39,22 +39,8 @@ function Comment() {
       });
   };
 
-  function deleteComment(id) {
-    fetch(`http://localhost:1234/comments/delete/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then(async (res) => {
-        const data = await res.json();
-        console.log(data.comments);
-        setComments(data.comments);
-        window.location.reload();
-      })
-      .catch((error) => console.error("Error:", error));
-  }
-
   useEffect(() => {
-    getAllComments();
+    // getAllComments();
   }, []);
 
   return (
@@ -101,31 +87,15 @@ function Comment() {
                 </div>
               </div>
 
-              <button type="submit" className="button is-info is-outlined">
+              <button
+                onClick={createComment}
+                type="submit"
+                className="button is-info is-outlined"
+              >
                 Envoyer
               </button>
             </form>
           ) : null}
-        </div>
-
-        <div className="list ">
-          {comments.map((comment) => {
-            return (
-              <div key={comment._id} className="box ">
-                <div className="btn-comm-del is-flex is-justify-content-space-between	">
-                  <p className="title is-4 ">{comment.userName}</p>
-                  <button
-                    onClick={() => {
-                      deleteComment(comment._id);
-                    }}
-                    class="delete"
-                  ></button>
-                </div>
-                <p className="title is-5 ">{comment.title}</p>
-                <p className="title is-6 ">{comment.content}</p>
-              </div>
-            );
-          })}
         </div>
       </div>
     </>

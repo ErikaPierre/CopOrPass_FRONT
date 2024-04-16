@@ -6,7 +6,7 @@ function ErrorPage() {
 
   return (
     <div id="error-page">
-      <h1>Oops!</h1>
+      <h3>Oops!</h3>
       <p>Sorry, something's wrong ... </p>
       <p>
         <i>{error.statusText || error.message}</i>

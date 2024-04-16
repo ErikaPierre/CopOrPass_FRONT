@@ -35,9 +35,9 @@ function DropsPage() {
 
   return (
     <div className="drops is-flex">
-      <div className="sidebar">
+      {/* <div className="sidebar">
         <Sidebar />
-      </div>
+      </div> */}
       <div className="all-drops m-4">
         <div className="is-flex is-justify-content-space-between">
           <div className="top-bar">

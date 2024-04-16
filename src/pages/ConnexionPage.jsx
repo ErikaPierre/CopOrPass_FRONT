@@ -28,13 +28,20 @@ function ConnexionPage() {
         sessionStorage.setItem("admin", JSON.stringify(decodedUser));
         sessionStorage.setItem("token", JSON.stringify(token));
         console.log(token);
-        
+
         enqueueSnackbar("Vous êtes bien connecté", {
           variant: "success",
         });
         navigate("/");
       })
-      .catch((error) => console.error("Erreur lors de la connexion :", error));
+      .catch((error) =>
+        console.error(
+          "Erreur lors de la connexion :",
+          enqueueSnackbar("Votre email ou mot de passe semble incorrect", {
+            variant: "error",
+          })
+        )
+      );
   };
 
   return (
@@ -87,7 +94,7 @@ function ConnexionPage() {
           </p>
         </div>
         <div className="register is-flex is-justify-content-center">
-          Pas de compte ? Je <Link to="/inscription"> m'inscris</Link>
+          Pas de compte ? <Link to="/inscription"> Je m'inscris</Link>
         </div>
       </form>
     </div>

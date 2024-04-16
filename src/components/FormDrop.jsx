@@ -8,7 +8,7 @@ function FormDrop() {
   const [price, setPrice] = useState(0);
   const [image, setImage] = useState([]);
 
-  const createProduct = async (e) => {
+  const createDrop = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -41,7 +41,7 @@ function FormDrop() {
 
   return (
     <>
-      <form onSubmit={createProduct} className="article-form">
+      <form onSubmit={createDrop} className="article-form">
         <div className="field">
           <label className="label">Date</label>
           <div className="control">
@@ -129,7 +129,7 @@ function FormDrop() {
 
         <div className="field is-grouped is-pulled-right	">
           <div className="control">
-            <button onClick={createProduct} className="button is-link">
+            <button onClick={createDrop} className="button is-link">
               Submit
             </button>
           </div>
