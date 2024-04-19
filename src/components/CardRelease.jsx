@@ -233,7 +233,9 @@ function CardRelease({
           </>
         )}
       </div>
-      <span className="is-size-3 has-text-weight-bold">{dateRelease}</span>
+      <span className="is-size-3 is-size-4-touch has-text-weight-bold">
+        {dateRelease}
+      </span>
       <div className="card-image">
         <figure className="image is-1by1">
           <img src={image} alt="" />
@@ -242,12 +244,12 @@ function CardRelease({
       <div className="title-card is-size-4 has-text-centered p-3">
         <strong>{brand}</strong>
       </div>
-      <div className="card-content">
-        <div className="media-content">
-          <p className="title is-5">{modeleName}</p>
-          <p className="title is-5"> Colori : {color}</p>
-        </div>
+
+      <div className="media-content p-3">
+        <p className="title is-5 is-size-6-touch">{modeleName}</p>
+        <p className="title is-5 is-size-6-touch"> Colori : {color}</p>
       </div>
+
       <div className="bouton-like-dislike is-flex is-justify-content-space-around	">
         <div className="Like is-flex">
           <button
@@ -257,7 +259,7 @@ function CardRelease({
           >
             &#x1F525;
           </button>
-          <p>{votes}</p>
+          <p className="is-size-5-mobile">{votes}</p>
         </div>
         <div className="Dislike is-flex">
           <button
@@ -269,7 +271,7 @@ function CardRelease({
           >
             &#x1F5D1;
           </button>
-          <p>{votes}</p>
+          <p className="is-size-5-mobile">{votes}</p>
         </div>
       </div>
     </div>

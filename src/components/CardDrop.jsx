@@ -233,15 +233,15 @@ function CardDrop({ id, image, brand, modeleName, color, price, votes }) {
         <div className="card-content">
           <div className="media-content">
             <p
-              className="subtitle is-5 has-text-weight-bold has-text-centered p-2"
+              className="subtitle is-5 is-size-6-mobile has-text-weight-bold has-text-centered p-2"
               id="border-drop-card-name"
             >
               {modeleName}
             </p>
-            <p className="subtitle is-5">
+            <p className="subtitle is-5 is-size-6-mobile">
               <b>Colori -</b> {color}
             </p>
-            <span className="price is-size-2 has-text-info has-text-weight-bold">
+            <span className="price is-size-2 is-size-3-touch has-text-info has-text-weight-bold">
               {price}€
             </span>
           </div>

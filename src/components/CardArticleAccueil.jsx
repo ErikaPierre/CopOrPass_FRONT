@@ -47,10 +47,10 @@ function CardArticleAccueil({ image, category, name, content, date, id }) {
                   </div>
                 ) : null}
               </div>
-              <h1 className="title is-3 mt-5">{name}</h1>
-              <p className="has-text-justified	">{content}</p>
+              <h1 className="title is-3 mt-5 is-size-6-mobile is-size-4-touch">{name}</h1>
+              <p className="has-text-justified is-size-6-touch">{content}</p>
               <hr />
-              <p>
+              <p className="is-size-7-touch">
                 <b>{date}</b>
               </p>
             </div>

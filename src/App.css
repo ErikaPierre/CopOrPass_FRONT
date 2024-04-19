@@ -4,7 +4,7 @@
 #root {
   margin-top: 10px;
   margin-bottom: 10px;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
 }
 
 h1,
@@ -180,4 +180,54 @@ p {
 
 #btn-SnkLks {
   color: white;
+}
+
+/*TABLET*/
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .main {
+    padding: 20px;
+  }
+
+  .card-accueil {
+    width: 250px;
+    gap: 45px;
+  }
+
+  .card-release {
+    width: 300px;
+  }
+
+  .product_s {
+    width: 900px;
+  }
+}
+/*MOBILE*/
+@media screen and (max-width: 767px) {
+  .card-cdc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+  }
+
+  .card-accueil {
+    width: 280px;
+  }
+
+  .card-release {
+    width: 280px;
+  }
+
+  .article-accueil {
+    width: 100%;
+  }
+
+  .wrapper {
+    display: flex;
+  }
+
+  .release-like,
+  .drop-like {
+    flex-wrap: wrap;
+  }
 }

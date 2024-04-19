@@ -50,7 +50,7 @@ function HomePage() {
     <>
       <main>
         <div className="has-text-justified">
-          <p>
+          <p className="is-size-6-mobile">
             Bienvenue sur
             <strong>
               <i> CopOrPass </i>
@@ -83,10 +83,10 @@ function HomePage() {
         </div>
 
         <div>
-          <div className="has-text-centered mt-6 mb-4 is-size-3">
+          <div className="has-text-centered mt-6 mb-4 is-size-3 is-size-4-mobile">
             <strong> 3 coups de &#128153; </strong>
           </div>
-          <div className="columns is-flex is-justify-content-space-around	">
+          <div className="columns card-cdc is-size-7-mobile	is-flex is-justify-content-space-around	is-flex-touch">
             {sneakers.map((sneaker) => {
               return (
                 <CardCdcAccueil
@@ -108,20 +108,20 @@ function HomePage() {
         </div>
 
         <div className="section-article is-flex is-align-items-center has-background-info-light mb-6">
-          <div className="article-photo is-hidden-mobile">
+          <div className="article-photo is-hidden-touch	">
             <img id="size-photo" src="src/assets/images/sneakers/AF1_MCR.jpg" />
           </div>
           <div className="has-text-justified has-text-black p-6">
-            <h3 className="titre is-size-5 has-text-centered">
+            <h3 className="titre is-size-5 is-size-6-mobile has-text-centered">
               &#128293; COUP DE COEUR DE CE MOIS &#128293;
             </h3>
-            <h2 className="sous-titre is-size-2	has-text-weight-semibold has-text-centered mt-3 mb-4">
+            <h2 className="sous-titre is-size-2	is-size-4-mobile has-text-weight-semibold has-text-centered mt-3 mb-4">
               Maison Chateau-
               <i>
                 <span id="red">Rouge</span>
               </i>
             </h2>
-            <p>
+            <p className="is-size-6-mobile">
               Derrière la marque de lifestyle parisienne
               <b>
                 <i>Maison Château Rouge</i>
@@ -140,7 +140,7 @@ function HomePage() {
               arrondissement, au cœur de la street culture parisienne.
             </p>
             <br />
-            <p>
+            <p className="is-size-6-mobile">
               La
               <b>
                 <i> Fearless Air Jordan I Mid </i>
@@ -163,10 +163,10 @@ function HomePage() {
         </div>
 
         <div className="has-text-justified">
-          <h3 className="titre-intro-2 is-size-3	has-text-centered has-text-weight-bold	mt-6 mb-4">
+          <h3 className="titre-intro-2 is-size-3	is-size-5-mobile has-text-centered has-text-weight-bold	mt-6 mb-4">
             Les sneakers et le streetwear sont à l'honneur
           </h3>
-          <p>
+          <p className="is-size-6-mobile">
             Lancé en 2023,{" "}
             <strong>
               <i>CoP.fr</i>
@@ -196,7 +196,7 @@ function HomePage() {
         </div>
 
         <div>
-          <h3 className="title is-3 has-text-info  has-text-weight-bold mt-6">
+          <h3 className="title is-3 is-size-5-mobile has-text-info  has-text-weight-bold mt-6">
             &#128293; LAST HOT DROPS &#128293;
           </h3>
         </div>
@@ -227,8 +227,8 @@ function HomePage() {
         </div>
 
         <div>
-          <h1 className="title is-3  mt-6">Nos marques collaboratrices</h1>
-          <p className="is-size-5 has-text-justified	">
+          <h2 className="title is-3 is-size-4-mobile mt-6">Nos marques collaboratrices</h2>
+          <p className="is-size-5 is-size-6-mobile has-text-justified	">
             Nous sommes profondément reconnaissants pour votre confiance en
             notre vision et notre mission. Votre contribution à notre plateforme
             a été un élément clé dans la création d'une expérience enrichissante
@@ -239,7 +239,7 @@ function HomePage() {
             cette collaboration fructueuse dans les années à venir.
           </p>
 
-          <div className="is-flex is-justify-content-space-around	 m-5">
+          <div className="is-flex is-hidden-mobile	is-justify-content-space-around	 m-5">
             <div className="icon is-large  ">
               <a href="https://www.nike.com/fr/">
                 <img

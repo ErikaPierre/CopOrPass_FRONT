@@ -1,14 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
+import { useState } from "react";
 
 function Header() {
-  const navigate = useNavigate();
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
   const admin = adminData ? adminData.user.role === "admin" : userData;
   const user = userData ? userData.user.role === "user" : adminData;
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
   const name = userData ? userData.user.userName : "";
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleLogout = async () => {
     sessionStorage.removeItem("user");
@@ -19,27 +26,24 @@ function Header() {
   return (
     <div>
       <div className="logo is-flex is-justify-content-center">
-        <Link to="http://localhost:5173/">
+        <Link to="/">
           <img
             id="border-img"
             src="src/assets/Logo_Site/SneakyLogo.png"
             width="180"
+            alt="Logo Sneaky"
           />
         </Link>
       </div>
 
-      <nav
-        className="navbar is-normal"
-        role="navigation"
-        aria-label="main navigation"
-      >
+      <nav className={`navbar is-normal ${isMenuOpen ? "is-active" : ""}`}>
         <div className="navbar-brand">
           <a
             role="button"
-            className="navbar-burger"
+            className={`navbar-burger ${isMenuOpen ? "is-active" : ""}`}
             aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
+            aria-expanded={isMenuOpen ? "true" : "false"}
+            onClick={toggleMenu}
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -47,7 +51,9 @@ function Header() {
           </a>
         </div>
 
-        <div id="navbarBasicExample" className="navbar-menu is-size-4">
+        <div
+          className={`navbar-menu is-size-4 ${isMenuOpen ? "is-active" : ""}`}
+        >
           <div className="navbar-start">
             <Link to="/" className="navbar-item has-text-white" id="menu-item">
               Accueil

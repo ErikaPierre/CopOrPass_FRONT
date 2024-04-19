@@ -19,7 +19,7 @@ function CardCdcAccueil({ imageUrl, name, logo, date, brand }) {
             </figure>
           </div>
           <div className="media-content">
-            <p className="title is-4">{brand}</p>
+            <p className="title is-4 is-size-6-mobile is-size-5-touch">{brand}</p>
             <p className="subtitle is-6">@{brand}</p>
           </div>
         </div>

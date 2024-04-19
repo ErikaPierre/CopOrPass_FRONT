@@ -3,6 +3,11 @@ import { useState } from "react";
 function Footer() {
   const [email, setEmail] = useState("");
 
+  const userData = JSON.parse(sessionStorage.getItem("user"));
+  const adminData = JSON.parse(sessionStorage.getItem("admin"));
+  const admin = adminData ? adminData.user.role === "admin" : userData;
+  const user = userData ? userData.user.role === "user" : adminData;
+
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -17,17 +22,19 @@ function Footer() {
 
       <div className="column pages is-flex is-justify-content-center is-align-items-center">
         <div>
-          <a className="navbar-item has-text-white" id="menu-item">
+          <a className="navbar-item has-text-white " id="menu-item">
             <p>Accueil</p>
           </a>
-          {/* <a className="navbar-item has-text-white" id="menu-item">
+          <a className="navbar-item has-text-white" id="menu-item">
             <p>Galerie &#128095;</p>
-          </a> */}
-          <a className="navbar-item has-text-white" id="menu-item">
-            <p>Releases &#129327;</p>
           </a>
+          {user || admin ? (
+            <a className="navbar-item has-text-white" id="menu-item">
+              <p>Releases &#129327;</p>
+            </a>
+          ) : null}
           <a className="navbar-item has-text-white" id="menu-item">
-            <p>Hot drop &#128293;</p>
+            <p>Drop &#128293;</p>
           </a>
         </div>
       </div>
@@ -46,10 +53,10 @@ function Footer() {
         </div>
       </div>
 
-      <div className="column form">
+      <div className="column form is-hidden-mobile	">
         <form method="post" onSubmit={handleSubmit}>
           <div className="title-form title is-size-3 has-text-weight-bold	has-text-info	">
-            <h1>NEWSLETTER</h1>
+            <h1 className="is-size-4-touch">NEWSLETTER</h1>
           </div>
           <span>Pour rester au courant de tout ce qu'il se passe </span>
           <div className="control has-icons-left has-icons-right mt-3 mb-5">
@@ -72,7 +79,7 @@ function Footer() {
       </div>
 
       <div className="column contacts is-flex is-justify-content-center is-align-items-center">
-        <div className="is-flex-direction-column">
+        <div className="is-flex-mobile	">
           <div className="twitter">
             <a href="https://twitter.com/">
               <img src="src/assets/RS/twitter.png" alt="" />
