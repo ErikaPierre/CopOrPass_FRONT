@@ -24,7 +24,6 @@ function DropsPage() {
   const filterProductsByBrand = () => {
     const filteredProducts = products.filter(
       (product) => product.brand === choiceBrand
-      // .includes(choiceBrand.toLowerCase())
     );
     setProductFilter(filteredProducts);
   };
@@ -34,28 +33,28 @@ function DropsPage() {
   }, []);
 
   return (
-    <div className="drops is-flex">
+    <div className="is-flex-direction-column">
       {/* <div className="sidebar">
         <Sidebar />
       </div> */}
-      <div className="all-drops m-4">
-        <div className="is-flex is-justify-content-space-between">
-          <div className="top-bar">
-            <h1 className="title is-3">Tous les derniers hot drops</h1>
-          </div>
-          <div className="div_filter_brand is-flex">
-            <input
-              className="input is-focused"
-              type="text"
-              placeholder="search ..."
-              value={choiceBrand}
-              onChange={(e) => setBrand(e.target.value)}
-            />
-            <button className="button-filter" onClick={filterProductsByBrand}>
-              Chercher
-            </button>
-          </div>
+      <div className="is-flex is-justify-content-space-between">
+        <div className="top-bar">
+          <h1 className="title is-3">Tous les derniers hot drops</h1>
         </div>
+        <div className="div_filter_brand is-flex">
+          <input
+            className="input is-focused"
+            type="text"
+            placeholder="search ..."
+            value={choiceBrand}
+            onChange={(e) => setBrand(e.target.value)}
+          />
+          <button className="button-filter" onClick={filterProductsByBrand}>
+            Chercher
+          </button>
+        </div>
+      </div>
+      <div className="all-drops m-4">
         <div className="wrapper columns is-flex-wrap-wrap	is-justify-content-center	m-3">
           {productFilter.map((product) => {
             return (
@@ -68,6 +67,8 @@ function DropsPage() {
                 modeleName={product.modeleName}
                 color={product.color}
                 price={product.price}
+                isLike={product.isLike}
+                votes={product.votes}
               />
             );
           })}

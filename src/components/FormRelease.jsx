@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function FormRelease() {
   const [dateRelease, setDateRelease] = useState("");
@@ -120,7 +121,12 @@ function FormRelease() {
             </button>
           </div>
           <div className="control">
-            <button className="button is-link is-light">Cancel</button>
+            <button
+              onClick={() => useNavigate(-1)}
+              className="button is-link is-light"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </form>

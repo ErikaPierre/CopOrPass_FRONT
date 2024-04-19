@@ -18,8 +18,6 @@ function ProductPage() {
     fetch(`http://localhost:1234/products/get-one/${productId}`).then(
       async (res) => {
         const data = await res.json();
-        console.log(data.product.image);
-        console.log(data.product.comments);
         setArticle(data.product);
         setComments(data.product.comments);
       }
@@ -33,7 +31,6 @@ function ProductPage() {
     })
       .then(async (res) => {
         const data = await res.json();
-        console.log(data.comments);
         setComments(data.comments);
         window.location.reload();
       })

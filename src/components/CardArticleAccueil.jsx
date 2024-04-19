@@ -1,8 +1,28 @@
-function CardArticleAccueil({ image, category, name, content, date }) {
+function CardArticleAccueil({ image, category, name, content, date, id }) {
   
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
   const user = userData ? userData.user.role === "user" : adminData;
+  
+  const userId = userData ? userData.user._id : null;
+
+  const handleLikeClick = async (e) => {
+    e.preventDefault();
+
+    try {
+      fetch(`http://localhost:1234/products/${id}/insert-to-like/${userId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          window.location.reload();
+        });
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du like :", error);
+    }
+  };
 
   return (
     <>
@@ -21,7 +41,9 @@ function CardArticleAccueil({ image, category, name, content, date }) {
                 </div>
                 {user ? (
                   <div className="like">
-                    <button id="border-btn-release">❤️</button>
+                    <button onClick={handleLikeClick} id="border-btn-release">
+                      ❤️
+                    </button>
                   </div>
                 ) : null}
               </div>

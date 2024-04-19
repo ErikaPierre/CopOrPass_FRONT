@@ -21,6 +21,17 @@ p {
   font-size: 1.25rem;
 }
 
+.main-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main {
+  max-width: 1440px;
+}
+
 #connexion,
 #inscription {
   width: 100%;
@@ -87,8 +98,8 @@ p {
 }
 
 .card-accueil {
-  width: 400px;
-  gap: 15px;
+  width: 350px;
+  gap: 45px;
 }
 
 .card-release {
@@ -119,9 +130,9 @@ p {
   text-decoration: underline;
 }
 
-.section-article_1,
+.section-article,
 .section-carrousel {
-  max-height: auto;
+  height: auto;
   border-top: 7px double #007acc;
   border-bottom: 7px double #007acc;
 }
@@ -136,6 +147,10 @@ p {
 .carousel {
   position: relative;
   margin: 0 auto;
+}
+
+.carousel img {
+  width: 60%;
 }
 
 .carousel-image {
@@ -158,7 +173,11 @@ p {
   right: -40px;
 }
 
-/* btn css*/
+/* article-accueil*/
+.article-accueil {
+  width: 90%;
+}
+
 #btn-SnkLks {
   color: white;
 }

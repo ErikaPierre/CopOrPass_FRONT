@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function FormDrop() {
   const [date, setDate] = useState("");
@@ -134,7 +135,12 @@ function FormDrop() {
             </button>
           </div>
           <div className="control">
-            <button className="button is-link is-light">Cancel</button>
+            <button
+              onClick={() => useNavigate(-1)}
+              className="button is-link is-light"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </form>

@@ -5,6 +5,8 @@ function Header() {
   const navigate = useNavigate();
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
+  const admin = adminData ? adminData.user.role === "admin" : userData;
+  const user = userData ? userData.user.role === "user" : adminData;
 
   const name = userData ? userData.user.userName : "";
 
@@ -57,13 +59,16 @@ function Header() {
             >
               Galerie
             </Link>
-            <Link
-              to="/releases"
-              className="navbar-item has-text-white"
-              id="menu-item"
-            >
-              Releases
-            </Link>
+
+            {user || admin ? (
+              <Link
+                to="/releases"
+                className="navbar-item has-text-white"
+                id="menu-item"
+              >
+                Releases
+              </Link>
+            ) : null}
             <Link
               to="/drops"
               className="navbar-item has-text-white"

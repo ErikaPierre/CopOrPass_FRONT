@@ -3,12 +3,28 @@ import { ImCross } from "react-icons/im";
 import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import { ImPencil2 } from "react-icons/im";
 
-function CardRelease({ id, image, dateRelease, brand, modeleName, color }) {
-  const [counter, setCounter] = useState(0);
-  const [discounter, setDiscounter] = useState(0);
+function CardRelease({
+  id,
+  image,
+  dateRelease,
+  brand,
+  modeleName,
+  color,
+  votes,
+  handleLike,
+}) {
+  const userData = JSON.parse(sessionStorage.getItem("user"));
+  const adminData = JSON.parse(sessionStorage.getItem("admin"));
+  const admin = adminData ? adminData.user.role === "admin" : userData;
+  const user = userData ? userData.user.role === "user" : adminData;
 
   const [releases, setReleases] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [liked, setLiked] = useState(false);
+  // const [totalVotes, setTotalVotes] = useState(0);
+
+  const userId = userData ? userData.user._id : null;
+
   // const [image, setImage] = useState([]);
   const [formData, setFormData] = useState({
     // image: image,
@@ -17,18 +33,6 @@ function CardRelease({ id, image, dateRelease, brand, modeleName, color }) {
     modeleName: modeleName,
     color: color,
   });
-
-  const userData = JSON.parse(sessionStorage.getItem("user"));
-  const adminData = JSON.parse(sessionStorage.getItem("admin"));
-  const admin = adminData ? adminData.user.role === "admin" : userData;
-  const user = userData ? userData.user.role === "user" : adminData;
-
-  function likeCounter() {
-    setCounter(counter + 1);
-  }
-  function dislikeCounter() {
-    setDiscounter(discounter + 1);
-  }
 
   function updateRelease(id) {
     fetch(`http://localhost:1234/releases/update/${id}`, {
@@ -68,24 +72,48 @@ function CardRelease({ id, image, dateRelease, brand, modeleName, color }) {
     setImage(e.target.files);
   };
 
-  // function likeRelease() {
-  //   fetch(`http://localhost:1234/releases/${id}/insert-to-like/:id_like`, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //   }).then(async (res) => {
-  //     const data = await res.json();
-  //     console.log(data.releases);
-  //     setReleases(data.releases);
-  //     window.location.reload();
-  //   });
-  // }
+  const handleLikeClick = async (e) => {
+    e.preventDefault();
+
+    try {
+      fetch(`http://localhost:1234/releases/${id}/insert-to-like/${userId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          window.location.reload();
+        });
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du like :", error);
+    }
+  };
+
+  const handleButtonClick = async () => {
+    try {
+      const response = await fetch(`http://localhost:1234/releases/${id}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      if (response.ok) {
+        setLiked(true);
+        handleLike(id);
+      } else {
+        console.error("Erreur lors de l'enregistrement du like");
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'enregistrement du like :", error);
+    }
+  };
 
   return (
     <div className="card card-release p-3 m-2" id="card-border-release">
       <div className="btn is-flex is-justify-content-space-between	mb-1">
         {user && (
           <div>
-            <button id="border-btn-release">
+            <button onClick={handleLikeClick} id="border-btn-release">
               <BsFillBookmarkHeartFill />
             </button>
           </div>
@@ -225,21 +253,23 @@ function CardRelease({ id, image, dateRelease, brand, modeleName, color }) {
           <button
             className="button-like mr-2"
             id="border-btn-release"
-            onClick={likeCounter}
+            onClick={handleButtonClick}
           >
             &#x1F525;
           </button>
-          <p>{counter}</p>
+          <p>{votes}</p>
         </div>
         <div className="Dislike is-flex">
           <button
             className="button-dislike mr-2"
             id="border-btn-release"
-            onClick={dislikeCounter}
+            onClick={() => {
+              dislike();
+            }}
           >
             &#x1F5D1;
           </button>
-          <p>{discounter}</p>
+          <p>{votes}</p>
         </div>
       </div>
     </div>
