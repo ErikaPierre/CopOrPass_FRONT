@@ -18,8 +18,6 @@ function ProductPage() {
     fetch(`http://localhost:1234/products/get-one/${productId}`).then(
       async (res) => {
         const data = await res.json();
-        console.log(data.product.image);
-        console.log(data.product.comments);
         setArticle(data.product);
         setComments(data.product.comments);
       }
@@ -33,7 +31,6 @@ function ProductPage() {
     })
       .then(async (res) => {
         const data = await res.json();
-        console.log(data.comments);
         setComments(data.comments);
         window.location.reload();
       })
@@ -58,14 +55,16 @@ function ProductPage() {
   };
 
   useEffect(() => {
+    const fetchVote = () => {
+      fetch(`http://localhost:1234/products/votes/${productId}`)
+        .then((res) => res.json())
+        .then((data) => setTotalVotes(data.product.votes))
+        .catch((error) =>
+          console.error("Erreur lors de la récupération des votes :", error)
+        );
+    }
+    fetchVote();
     getOneProduct();
-
-    fetch(`http://localhost:1234/products/votes/${productId}`)
-      .then((res) => res.json())
-      .then((data) => setTotalVotes(data.product.votes))
-      .catch((error) =>
-        console.error("Erreur lors de la récupération des votes :", error)
-      );
   }, [productId]);
 
   return (
@@ -149,7 +148,7 @@ function ProductPage() {
               <div key={comment._id} className="box ">
                 <div className="btn-comm-del is-flex is-justify-content-space-between	">
                   <p className="title is-4 ">{comment.userName}</p>
-                  {adminData && adminData.user.role === "admin" ? (
+                  {adminData && adminData.payload.role === "admin" ? (
                     <button
                       onClick={() => {
                         deleteComment(comment._id);

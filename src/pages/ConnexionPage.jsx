@@ -46,8 +46,12 @@ function ConnexionPage() {
 
   return (
     <div className="login is-flex-direction-column " id="connexion">
+      <img
+        src="src/assets/images/undraw_tabs_re_a2bd.svg"
+        className="image is-128x128"
+        alt=""
+      />
       <h1 className="title is-4">Connexion</h1>
-
       <form method="post" onSubmit={loginUser}>
         <div className="field">
           <p className="control has-icons-left has-icons-right">

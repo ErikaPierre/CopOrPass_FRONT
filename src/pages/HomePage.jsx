@@ -49,8 +49,8 @@ function HomePage() {
   return (
     <>
       <main>
-        <div className="section-introduction has-text-justified m-5	">
-          <p>
+        <div className="has-text-justified">
+          <p className="is-size-6-mobile">
             Bienvenue sur
             <strong>
               <i> CopOrPass </i>
@@ -82,11 +82,11 @@ function HomePage() {
           </p>
         </div>
 
-        <div className="section-CDC">
-          <div className="text-CdC has-text-centered mt-6 mb-4 is-size-3">
-            Voici nos <strong> 3 coups de &#128153; </strong>de Février :
+        <div>
+          <div className="has-text-centered mt-6 mb-4 is-size-3 is-size-4-mobile">
+            <strong> 3 coups de &#128153; </strong>
           </div>
-          <div className="wrapper is-flex is-justify-content-space-around	">
+          <div className="columns card-cdc is-size-7-mobile	is-flex is-justify-content-space-around	is-flex-touch">
             {sneakers.map((sneaker) => {
               return (
                 <CardCdcAccueil
@@ -100,55 +100,51 @@ function HomePage() {
               );
             })}
           </div>
-          <div className="button-accueil is-flex is-justify-content-center mt-6 mb-6">
+          <div className="is-flex is-justify-content-center mt-6 mb-6">
             <Link to="/galerie">
               <button className="button is-info is-light">Voir galerie</button>
             </Link>
           </div>
         </div>
 
-        <div className="section-article_1 is-flex is-align-items-center has-background-info-light mb-6">
-          <div className="article-photo">
-            <img
-              id="size-photo"
-              src="src/assets/images/sneakers/AF1_MCR.jpg"
-              alt=""
-            />
+        <div className="section-article is-flex is-align-items-center has-background-info-light mb-6">
+          <div className="article-photo is-hidden-touch	">
+            <img id="size-photo" src="src/assets/images/sneakers/AF1_MCR.jpg" />
           </div>
-          <div className="article-MCR	has-text-justified has-text-black p-6">
-            <h3 className="titre is-size-5 has-text-centered">
+          <div className="has-text-justified has-text-black p-6">
+            <h3 className="titre is-size-5 is-size-6-mobile has-text-centered">
               &#128293; COUP DE COEUR DE CE MOIS &#128293;
             </h3>
-            <h2 className="sous-titre is-size-2	has-text-weight-semibold has-text-centered mt-3 mb-4">
+            <h2 className="sous-titre is-size-2	is-size-4-mobile has-text-weight-semibold has-text-centered mt-3 mb-4">
               Maison Chateau-
               <i>
                 <span id="red">Rouge</span>
               </i>
             </h2>
-            <p>
-              Derrière la marque de lifestyle parisienne{" "}
+            <p className="is-size-6-mobile">
+              Derrière la marque de lifestyle parisienne
               <b>
                 <i>Maison Château Rouge</i>
-              </b>{" "}
-              se cache{" "}
+              </b>
+              se cache
               <b>
                 <i>Youssouf Fofana</i>
               </b>
               , un jeune designer qui met en valeur le dynamisme et la richesse
               d'une diaspora africaine contemporaine à Paris. La participation
-              de Youssouf à la série{" "}
+              de Youssouf à la série
               <b>
                 <i> Air Jordan I Mid « Fearless » </i>
-              </b>{" "}
+              </b>
               approfondit sa contribution à la mode afrocentrique du 18e
               arrondissement, au cœur de la street culture parisienne.
             </p>
             <br />
-            <p>
-              La{" "}
+            <p className="is-size-6-mobile">
+              La
               <b>
                 <i> Fearless Air Jordan I Mid </i>
-              </b>{" "}
+              </b>
               de Youssouf affiche son assurance avec une empeigne à motifs
               complexes en relief. L'emblématique coloris de la AJI est adouci
               par des couleurs bleu psychédélique et vanille pâle sur
@@ -158,7 +154,7 @@ function HomePage() {
               incorporant ses racines culturelles par un clin d'œil à la
               vannerie et à l'art populaire. En harmonie avec le reste de la
               série
-              <b> Fearless</b> d'Air Jordan, cette version{" "}
+              <b> Fearless</b> d'Air Jordan, cette version
               <u>reste fidèle à l'OG</u> avec la marque Nike Air sur la
               languette et un logo Jordan Wings épinglé sur le col au niveau de
               la cheville.
@@ -166,11 +162,11 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="section-introduction_2 has-text-justified m-5">
-          <h3 className="titre-intro-2 is-size-3	has-text-centered has-text-weight-bold	mt-6 mb-4">
+        <div className="has-text-justified">
+          <h3 className="titre-intro-2 is-size-3	is-size-5-mobile has-text-centered has-text-weight-bold	mt-6 mb-4">
             Les sneakers et le streetwear sont à l'honneur
           </h3>
-          <p>
+          <p className="is-size-6-mobile">
             Lancé en 2023,{" "}
             <strong>
               <i>CoP.fr</i>
@@ -200,7 +196,7 @@ function HomePage() {
         </div>
 
         <div>
-          <h3 className="title is-3 has-text-info  has-text-weight-bold mt-6">
+          <h3 className="title is-3 is-size-5-mobile has-text-info  has-text-weight-bold mt-6">
             &#128293; LAST HOT DROPS &#128293;
           </h3>
         </div>
@@ -208,14 +204,15 @@ function HomePage() {
           <Carousel />
         </div>
 
-        <div className=" is-flex has-text-black ml-3 mb-5">
-          <div className="section-article_2">
+        <div className="is-flex has-text-black ml-3 mb-5">
+          <div className="article-accueil">
             {articles &&
               articles.map((article) => {
                 return (
                   <Link to={`/product/${article._id}`} id="product-item">
                     <CardArticleAccueil
-                      key={article.name}
+                      key={article._id}
+                      id={article._id}
                       image={article.image}
                       category={article.category}
                       url={article.url}
@@ -229,9 +226,9 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="remerciement p-4	">
-          <h1 className="title is-3  mt-6">Nos marques collaboratrices</h1>
-          <p className="remerciement-text is-size-4 has-text-justified	">
+        <div>
+          <h2 className="title is-3 is-size-4-mobile mt-6">Nos marques collaboratrices</h2>
+          <p className="is-size-5 is-size-6-mobile has-text-justified	">
             Nous sommes profondément reconnaissants pour votre confiance en
             notre vision et notre mission. Votre contribution à notre plateforme
             a été un élément clé dans la création d'une expérience enrichissante
@@ -242,8 +239,8 @@ function HomePage() {
             cette collaboration fructueuse dans les années à venir.
           </p>
 
-          <div className="columns is-multiline	m-5">
-            <div className="column  ">
+          <div className="is-flex is-hidden-mobile	is-justify-content-space-around	 m-5">
+            <div className="icon is-large  ">
               <a href="https://www.nike.com/fr/">
                 <img
                   src="src/assets/Logos_Marques/nike-logo.webp"
@@ -251,7 +248,7 @@ function HomePage() {
                 />
               </a>
             </div>
-            <div className="column ">
+            <div className="icon is-large ">
               <a href="https://www.nike.com/fr/jordan">
                 <img
                   src="src/assets/Logos_Marques/logo-jordan.webp"
@@ -259,7 +256,7 @@ function HomePage() {
                 />
               </a>
             </div>
-            <div className="column ">
+            <div className="icon is-large ">
               <a href="https://www.converse.com/fr">
                 <img
                   src="src/assets/Logos_Marques/Converse-logo-500x281.webp"
@@ -267,7 +264,7 @@ function HomePage() {
                 />
               </a>
             </div>
-            <div className="column ">
+            <div className="icon is-large ">
               <a href="https://eu.puma.com/fr/fr/home">
                 <img
                   src="src/assets/Logos_Marques/logo-puma.webp"
@@ -275,7 +272,7 @@ function HomePage() {
                 />
               </a>
             </div>
-            <div className="column ">
+            <div className="icon is-large ">
               <a href="https://www.vans.fr/">
                 <img
                   src="src/assets/Logos_Marques/logo-vans.webp"
@@ -283,7 +280,7 @@ function HomePage() {
                 />
               </a>
             </div>
-            <div className="column ">
+            <div className="icon is-large ">
               <a href="https://www.newbalance.fr/fr">
                 <img
                   src="src/assets/Logos_Marques/new-balance-logo.webp"
@@ -291,7 +288,7 @@ function HomePage() {
                 />
               </a>
             </div>
-            <div className="column ">
+            <div className="icon is-large ">
               <a href="https://www.reebok.eu/fr-fr/">
                 <img
                   src="src/assets/Logos_Marques/Reebok_Logo.webp"
@@ -299,7 +296,7 @@ function HomePage() {
                 />
               </a>
             </div>
-            <div className="column ">
+            <div className="icon is-large ">
               <a href="https://www.adidas.fr/">
                 <img
                   src="src/assets/Logos_Marques/adidas-logo.webp"
@@ -307,7 +304,7 @@ function HomePage() {
                 />
               </a>
             </div>
-            <div className="column ">
+            <div className="icon is-large ">
               <a href="https://www.crocs.fr/">
                 <img
                   src="src/assets/Logos_Marques/Crocs-Logo.webp"

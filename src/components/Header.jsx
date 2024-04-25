@@ -1,12 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
+import { useState } from "react";
 
 function Header() {
-  const navigate = useNavigate();
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
+  const admin = adminData ? adminData.payload.role === "admin" : userData;
+  const user = userData ? userData.payload.role === "user" : adminData;
 
-  const name = userData ? userData.user.userName : "";
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const name = userData ? userData.payload.userName : "";
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleLogout = async () => {
     sessionStorage.removeItem("user");
@@ -17,27 +26,24 @@ function Header() {
   return (
     <div>
       <div className="logo is-flex is-justify-content-center">
-        <Link to="http://localhost:5173/">
+        <Link to="/">
           <img
             id="border-img"
             src="src/assets/Logo_Site/SneakyLogo.png"
             width="180"
+            alt="Logo Sneaky"
           />
         </Link>
       </div>
 
-      <nav
-        className="navbar is-normal"
-        role="navigation"
-        aria-label="main navigation"
-      >
+      <nav className={`navbar is-normal ${isMenuOpen ? "is-active" : ""}`}>
         <div className="navbar-brand">
           <a
             role="button"
-            className="navbar-burger"
+            className={`navbar-burger ${isMenuOpen ? "is-active" : ""}`}
             aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
+            aria-expanded={isMenuOpen ? "true" : "false"}
+            onClick={toggleMenu}
           >
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
@@ -45,7 +51,9 @@ function Header() {
           </a>
         </div>
 
-        <div id="navbarBasicExample" className="navbar-menu is-size-4">
+        <div
+          className={`navbar-menu is-size-4 ${isMenuOpen ? "is-active" : ""}`}
+        >
           <div className="navbar-start">
             <Link to="/" className="navbar-item has-text-white" id="menu-item">
               Accueil
@@ -57,13 +65,16 @@ function Header() {
             >
               Galerie
             </Link>
-            <Link
-              to="/releases"
-              className="navbar-item has-text-white"
-              id="menu-item"
-            >
-              Releases
-            </Link>
+
+            {user || admin ? (
+              <Link
+                to="/releases"
+                className="navbar-item has-text-white"
+                id="menu-item"
+              >
+                Releases
+              </Link>
+            ) : null}
             <Link
               to="/drops"
               className="navbar-item has-text-white"
@@ -101,7 +112,7 @@ function Header() {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons mr-4">
-                {adminData && adminData.user.role === "admin" ? (
+                {adminData && adminData.payload.role === "admin" ? (
                   <>
                     <p>{name}</p>
                     <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">
@@ -114,7 +125,7 @@ function Header() {
                       Deconnexion
                     </button>
                   </>
-                ) : userData && userData.user.role === "user" ? (
+                ) : userData && userData.payload.role === "user" ? (
                   <>
                     <p id="name-user">{name}</p>
                     <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">
