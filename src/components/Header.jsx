@@ -5,13 +5,13 @@ import { useState } from "react";
 function Header() {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
-  const admin = adminData ? adminData.user.role === "admin" : userData;
-  const user = userData ? userData.user.role === "user" : adminData;
+  const admin = adminData ? adminData.payload.role === "admin" : userData;
+  const user = userData ? userData.payload.role === "user" : adminData;
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
-  const name = userData ? userData.user.userName : "";
+  const name = userData ? userData.payload.userName : "";
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -112,7 +112,7 @@ function Header() {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons mr-4">
-                {adminData && adminData.user.role === "admin" ? (
+                {adminData && adminData.payload.role === "admin" ? (
                   <>
                     <p>{name}</p>
                     <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">
@@ -125,7 +125,7 @@ function Header() {
                       Deconnexion
                     </button>
                   </>
-                ) : userData && userData.user.role === "user" ? (
+                ) : userData && userData.payload.role === "user" ? (
                   <>
                     <p id="name-user">{name}</p>
                     <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">

@@ -6,8 +6,8 @@ import { ImPencil2 } from "react-icons/im";
 function CardDrop({ id, image, brand, modeleName, color, price, votes }) {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
-  const admin = adminData ? adminData.user.role === "admin" : userData;
-  const user = userData ? userData.user.role === "user" : adminData;
+  const admin = adminData ? adminData.payload.role === "admin" : userData;
+  const user = userData ? userData.payload.role === "user" : adminData;
 
   // const [counter, setCounter] = useState(0);
   // const [discounter, setDiscounter] = useState(0);
@@ -19,7 +19,7 @@ function CardDrop({ id, image, brand, modeleName, color, price, votes }) {
   const [totalVotes, setTotalVotes] = useState(0);
   const [hasVoted, setHasVoted] = useState(false);
 
-  const userId = userData ? userData.user._id : null;
+  const userId = userData ? userData.payload._id : null;
 
   // const [image, setImage] = useState([]);
   const [formData, setFormData] = useState({

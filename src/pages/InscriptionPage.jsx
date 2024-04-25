@@ -30,6 +30,11 @@ function InscriptionPage() {
 
   return (
     <div className="login is-flex-direction-column " id="connexion">
+      <img
+        src="src/assets/images/undraw_secure_login_pdn4.svg"
+        className="image is-128x128"
+        alt=""
+      />
       <h1 className="title is-4">Inscription</h1>
       <form method="post" onSubmit={registerUser}>
         <div className="field">

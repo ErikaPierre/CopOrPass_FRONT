@@ -9,7 +9,7 @@ function LikePage() {
   const [dropLiked, setDropLiked] = useState([]);
 
   const userData = JSON.parse(sessionStorage.getItem("user"));
-  const userId = userData ? userData.user._id : null;
+  const userId = userData ? userData.payload.id : null;
 
   const AllArticlesLiked = () => {
     fetch(`http://localhost:1234/products/get-all-likes/${userId}`).then(

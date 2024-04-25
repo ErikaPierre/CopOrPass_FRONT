@@ -15,15 +15,15 @@ function CardRelease({
 }) {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
-  const admin = adminData ? adminData.user.role === "admin" : userData;
-  const user = userData ? userData.user.role === "user" : adminData;
+  const admin = adminData ? adminData.payload.role === "admin" : userData;
+  const user = userData ? userData.payload.role === "user" : adminData;
 
   const [releases, setReleases] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [liked, setLiked] = useState(false);
   // const [totalVotes, setTotalVotes] = useState(0);
 
-  const userId = userData ? userData.user._id : null;
+  const userId = userData ? userData.payload._id : null;
 
   // const [image, setImage] = useState([]);
   const [formData, setFormData] = useState({

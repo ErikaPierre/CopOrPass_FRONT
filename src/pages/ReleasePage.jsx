@@ -121,8 +121,8 @@ import { useEffect, useState } from "react";
 function ReleasePage() {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
-  const admin = adminData ? adminData.user.role === "admin" : userData;
-  const user = userData ? userData.user.role === "user" : adminData;
+  const admin = adminData ? adminData.payload.role === "admin" : userData;
+  const user = userData ? userData.payload.role === "user" : adminData;
 
   const [releases, setReleases] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

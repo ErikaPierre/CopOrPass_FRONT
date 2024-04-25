@@ -2,9 +2,9 @@ function CardArticleAccueil({ image, category, name, content, date, id }) {
   
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
-  const user = userData ? userData.user.role === "user" : adminData;
+  const user = userData ? userData.payload.role === "user" : adminData;
   
-  const userId = userData ? userData.user._id : null;
+  const userId = userData ? userData.payload._id : null;
 
   const handleLikeClick = async (e) => {
     e.preventDefault();

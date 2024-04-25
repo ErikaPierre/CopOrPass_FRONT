@@ -99,7 +99,7 @@ function DropsPage() {
 
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
-  const admin = adminData ? adminData.user.role === "admin" : userData;
+  const admin = adminData ? adminData.payload.role === "admin" : userData;
 
   const getAllProductDrop = () => {
     fetch("http://localhost:1234/drops/all").then(async (res) => {
