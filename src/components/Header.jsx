@@ -118,6 +118,9 @@ function Header() {
                     <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">
                       <Link to="/users">Utilisateurs</Link>
                     </button>
+                    <button className="button is-rounded is-info is-danger is-dark ml-2 mr-2">
+                      <Link to="/newsletter">Newsletter</Link>
+                    </button>
                     <button
                       className="button is-info is-light"
                       onClick={handleLogout}

@@ -1,9 +1,16 @@
-function CardArticleAccueil({ image, category, name, content, date, id }) {
-  
+function CardArticleAccueil({
+  image,
+  category,
+  name,
+  content,
+  date,
+  id,
+  onRemove,
+}) {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
   const user = userData ? userData.payload.role === "user" : adminData;
-  
+
   const userId = userData ? userData.payload._id : null;
 
   const handleLikeClick = async (e) => {
@@ -40,14 +47,26 @@ function CardArticleAccueil({ image, category, name, content, date, id }) {
                   <span className="tag is-warning">{category}</span>
                 </div>
                 {user ? (
-                  <div className="like">
-                    <button onClick={handleLikeClick} id="border-btn-release">
-                      ❤️
-                    </button>
-                  </div>
+                  <>
+                    <div className="like">
+                      <button onClick={handleLikeClick} id="border-btn-release">
+                        ❤️
+                      </button>
+                      {onRemove && (
+                        <button
+                          id="border-btn-release"
+                          onClick={() => onRemove(id)}
+                        >
+                          ❌
+                        </button>
+                      )}
+                    </div>
+                  </>
                 ) : null}
               </div>
-              <h1 className="title is-3 mt-5 is-size-6-mobile is-size-4-touch">{name}</h1>
+              <h1 className="title is-3 mt-5 is-size-6-mobile is-size-4-touch">
+                {name}
+              </h1>
               <p className="has-text-justified is-size-6-touch">{content}</p>
               <hr />
               <p className="is-size-7-touch">

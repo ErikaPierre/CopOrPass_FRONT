@@ -10,6 +10,20 @@ function Footer() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    fetch("http://localhost:1234/newsletter/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (

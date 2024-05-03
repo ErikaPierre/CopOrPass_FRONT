@@ -3,16 +3,20 @@ import { ImCross } from "react-icons/im";
 import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import { ImPencil2 } from "react-icons/im";
 
-function CardDrop({ id, image, brand, modeleName, color, price, votes }) {
+function CardDrop({
+  id,
+  image,
+  brand,
+  modeleName,
+  color,
+  price,
+  votes,
+  onRemove,
+}) {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
   const admin = adminData ? adminData.payload.role === "admin" : userData;
   const user = userData ? userData.payload.role === "user" : adminData;
-
-  // const [counter, setCounter] = useState(0);
-  // const [discounter, setDiscounter] = useState(0);
-  // const likeCounter = () => setCounter(counter + 1);
-  // const dislikeCounter = () => setDiscounter(discounter + 1);
 
   const [drops, setDrops] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -80,7 +84,7 @@ function CardDrop({ id, image, brand, modeleName, color, price, votes }) {
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
-          // window.location.reload();
+          window.location.reload();
         });
     } catch (error) {
       console.error("Erreur lors de la mise à jour du like :", error);
@@ -221,6 +225,13 @@ function CardDrop({ id, image, brand, modeleName, color, price, votes }) {
               )}
             </>
           )}
+          <div>
+            {onRemove && (
+              <button id="border-btn-release" onClick={() => onRemove(id)}>
+                ❌
+              </button>
+            )}
+          </div>
         </div>
         <div className="card-image">
           <figure className="image is-1by1">

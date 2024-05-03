@@ -38,6 +38,25 @@ function LikePage() {
     );
   };
 
+  const removeArticleLiked = (id) => {
+    const updatedArticleLiked = articleLiked.filter(
+      (article) => article._id !== id
+    );
+    setArticleLiked(updatedArticleLiked);
+  };
+
+  const removeReleaseLiked = (id) => {
+    const updatedReleaseLiked = releaseLiked.filter(
+      (release) => release._id !== id
+    );
+    setReleaseLiked(updatedReleaseLiked);
+  };
+
+  const removeDropLiked = (id) => {
+    const updatedDropLiked = dropLiked.filter((drop) => drop._id !== id);
+    setDropLiked(updatedDropLiked);
+  };
+
   useEffect(() => {
     AllArticlesLiked();
     AllDropLiked();
@@ -68,6 +87,7 @@ function LikePage() {
                       content={article.content}
                       date={article.date}
                       isLike={article.isLike}
+                      onRemove={removeArticleLiked}
                     />
                   </>
                 );
@@ -91,6 +111,7 @@ function LikePage() {
                       modeleName={release.modeleName}
                       color={release.color}
                       isLike={release.isLike}
+                      onRemove={removeReleaseLiked}
                     />
                   </>
                 );
@@ -115,6 +136,7 @@ function LikePage() {
                       color={drop.color}
                       price={drop.price}
                       isLike={drop.isLike}
+                      onRemove={removeDropLiked}
                     />
                   </>
                 );

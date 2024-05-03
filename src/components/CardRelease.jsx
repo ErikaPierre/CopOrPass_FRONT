@@ -12,6 +12,8 @@ function CardRelease({
   color,
   votes,
   handleLike,
+  handleDislike,
+  onRemove,
 }) {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
@@ -90,16 +92,38 @@ function CardRelease({
     }
   };
 
-  const handleButtonClick = async () => {
+  const like = async () => {
     try {
-      const response = await fetch(`http://localhost:1234/releases/${id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
-
+      const response = await fetch(
+        `http://localhost:1234/releases/votes/${id}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       if (response.ok) {
         setLiked(true);
         handleLike(id);
+      } else {
+        console.error("Erreur lors de l'enregistrement du like");
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'enregistrement du like :", error);
+    }
+  };
+
+  const dislike = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:1234/releases/devotes/${id}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response.ok) {
+        setLiked(true);
+        handleDislike(id);
       } else {
         console.error("Erreur lors de l'enregistrement du like");
       }
@@ -233,12 +257,19 @@ function CardRelease({
           </>
         )}
       </div>
+      <div>
+        {onRemove && (
+          <button id="border-btn-release" onClick={() => onRemove(id)}>
+            ❌
+          </button>
+        )}
+      </div>
       <span className="is-size-3 is-size-4-touch has-text-weight-bold">
         {dateRelease}
       </span>
       <div className="card-image">
         <figure className="image is-1by1">
-          <img src={image} alt="" />
+          <img src={`http://localhost:1234/${image}`} alt="" />
         </figure>
       </div>
       <div className="title-card is-size-4 has-text-centered p-3">
@@ -255,23 +286,20 @@ function CardRelease({
           <button
             className="button-like mr-2"
             id="border-btn-release"
-            onClick={handleButtonClick}
+            onClick={like}
           >
             &#x1F525;
           </button>
-          <p className="is-size-5-mobile">{votes}</p>
         </div>
+        <p className="is-size-5-mobile">{votes}</p>
         <div className="Dislike is-flex">
           <button
             className="button-dislike mr-2"
             id="border-btn-release"
-            onClick={() => {
-              dislike();
-            }}
+            onClick={dislike}
           >
             &#x1F5D1;
           </button>
-          <p className="is-size-5-mobile">{votes}</p>
         </div>
       </div>
     </div>

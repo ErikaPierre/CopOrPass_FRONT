@@ -1,66 +1,69 @@
 # CopOrPass
 
-## Titre et Description :
+## Title and Description:
 
-L'agrégateur de sneakers est une plateforme en ligne qui permet aux utilisateurs de rechercher, découvrir et suivre les dernières sorties de sneakers.
+Sneaker Aggregator is an online platform that allows users to search, discover, and track the latest sneaker releases.
 
-## Installations :
+## Deployment Procedure:
 
-Pour runner convenable le projet il faut installer les dépendances suivantes avec un "npm i + nom_dependance" :
+The back-end of the app is written in React.
 
-- babelrc : pour transpiler le code JavaScript moderne en une version compatible avec les navigateurs ou les environnements Node.js plus anciens.
+Make sure to add your own `.env` file. All the environment variables you will need are listed in the file `env.sample`.
 
-- backpack-core: fournit les fonctionnalités principales pour le développement d'applications Node.js.
+To run the project locally, install the dependencies:
 
-- bcryptjs: pour hasher les mots de passes
+To properly start the project, begin by running `npm install`, then install all the following dependencies with the following command: `npm i + dependency_name`:
 
-- cors: pour permettre à un site web d'accéder à des ressources provenant d'une autre origine
+- bulma
+- jwt-decode
+- notistack
+- react-dom
+- react-icons
+- react-router-dom
 
-- dotenv: pour charger des variables d'environnement à partir d'un fichier .env. Utile pour garder vos informations sensibles.
+To deploy the project:
+To deploy the app, we are going to use Vercel hosting service.
 
-- express: pour executer les requettes http
+- Commit your react app to a repository on github.com
+- Create an account on Vercel.com
+- Create a new project called chocolate-manager-front
+- In the secrets section, add the environment variable called VITE_API_URL=https://your-backend-url.domain
+- Link the project to your github repository corresponding to chocolate-manager-front
+- Whenever you push to your github repository, your app will be automatically deployed on vercel.
 
-- jsonwebtoken: pour créer les jwt
+## Usage:
 
-- mongoose: pour communiquer la BDD MongoDB
+1. Run the FRONT and the BACK with "npm run dev"
 
-- multer: pour gérer les téléchargements de fichiers (uploads) dans les applications Express.js.
+2. Objectives:
 
-- router: permet de définir des routes pour l'application web.
+- Provide a smooth and responsive user experience on both web and mobile.
+- Provide users with an intuitive interface to explore new sneaker releases.
+- Allow users to follow their favorite brands and models.
 
-## Utilisation:
+3. Feature List:
+   1 - Authentication and User Management:
 
-1. Lancer le BACK et le FRONT avec un "npm run dev"
+- User registration with field verification and server-side validation.
+- User login with credential validation.
 
-2. Objectifs :
+2 - Search and Filtering:
 
-- Offrir une expérience utilisateur fluide et responsive sur web et mobile.
-- Fournir aux utilisateurs une interface intuitive pour explorer les nouvelles sorties de sneakers.
-- Permettre aux utilisateurs de suivre leurs marques et modèles préférés.
+- Search bar allowing users to search for sneakers by brand, model, color, etc.
 
-3. Liste de fonctionnalités :
-   1 - Authentification et gestion des utilisateurs :
+3 - Sneaker Display:
 
-- Inscription des utilisateurs avec vérification des champs et validation côté serveur.
-- Connexion des utilisateurs avec validation des identifiants.
+- Display sneakers in list or grid format.
 
-2 - Recherche et filtrage :
+4 - User Interface:
 
-- Barre de recherche permettant aux utilisateurs de rechercher des sneakers par marque, modèle, couleur, etc.
+- Ergonomic and intuitive design for smooth navigation.
+- Responsive design for optimal user experience on all devices.
 
-3 - Affichage des sneakers :
+5 - Site Administration:
 
-- Affichage des sneakers sous forme de liste ou de grille.
-
-4 - Interface utilisateur :
-
-- Conception ergonomique et intuitive pour une navigation fluide.
-- Conception responsive pour une expérience utilisateur optimale sur tous les appareils.
-
-5 - Administration du site :
-
-- Autorisations basées sur les rôles pour limiter l'accès aux fonctionnalités administratives.
+- Role-based permissions to restrict access to administrative features.
 
 ## Bugs:
 
-- Pour tester le CRUD, utiliser POSTMAN pour les Api
+- Use debugging console
