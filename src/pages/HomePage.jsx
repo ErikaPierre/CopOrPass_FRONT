@@ -49,7 +49,7 @@ function HomePage() {
   return (
     <>
       <main>
-        <div className="has-text-justified">
+        <div className="has-text-justified padding">
           <p className="is-size-6-mobile">
             Bienvenue sur
             <strong>
@@ -83,7 +83,7 @@ function HomePage() {
         </div>
 
         <div>
-          <div className="has-text-centered mt-6 mb-4 is-size-3 is-size-4-mobile">
+          <div className="has-text-centered mt-6 mb-5 is-size-3 is-size-4-mobile">
             <strong> 3 coups de &#128153; </strong>
           </div>
           <div className="columns card-cdc is-size-7-mobile	is-flex is-justify-content-space-around	is-flex-touch">
@@ -107,7 +107,7 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="section-article is-flex is-align-items-center has-background-info-light mb-6">
+        <div className="section-MCR is-flex is-align-items-center has-background-info-light mb-6">
           <div className="article-photo is-hidden-touch	">
             <img id="size-photo" src="src/assets/images/sneakers/AF1_MCR.jpg" />
           </div>
@@ -162,11 +162,11 @@ function HomePage() {
           </div>
         </div>
 
-        <div className="has-text-justified">
+        <div className="has-text-justified ">
           <h3 className="titre-intro-2 is-size-3	is-size-5-mobile has-text-centered has-text-weight-bold	mt-6 mb-4">
             Les sneakers et le streetwear sont à l'honneur
           </h3>
-          <p className="is-size-6-mobile">
+          <p className="is-size-6-mobile padding">
             Lancé en 2023,{" "}
             <strong>
               <i>CoP.fr</i>
@@ -195,11 +195,9 @@ function HomePage() {
           </p>
         </div>
 
-        <div>
-          <h3 className="title is-3 is-size-5-mobile has-text-info  has-text-weight-bold mt-6">
-            &#128293; LAST HOT DROPS &#128293;
-          </h3>
-        </div>
+        <h3 className="title is-3 is-size-5-mobile has-text-info  has-text-weight-bold mt-6">
+          &#128293; LAST HOT DROPS &#128293;
+        </h3>
         <div className="section-carrousel p-2 has-background-info-light	mb-6">
           <Carousel />
         </div>
@@ -219,6 +217,7 @@ function HomePage() {
                       name={article.name}
                       content={article.content}
                       date={article.date}
+                      
                     />
                   </Link>
                 );
@@ -226,8 +225,10 @@ function HomePage() {
           </div>
         </div>
 
-        <div>
-          <h2 className="title is-3 is-size-4-mobile mt-6">Nos marques collaboratrices</h2>
+        <div className="remerciements padding">
+          <h2 className="title is-3 is-size-4-mobile mt-6">
+            Nos marques collaboratrices
+          </h2>
           <p className="is-size-5 is-size-6-mobile has-text-justified	">
             Nous sommes profondément reconnaissants pour votre confiance en
             notre vision et notre mission. Votre contribution à notre plateforme

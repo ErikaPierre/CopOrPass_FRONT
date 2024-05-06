@@ -13,7 +13,6 @@ function ProductPage() {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
 
-
   const getOneProduct = () => {
     fetch(`http://localhost:1234/products/get-one/${productId}`).then(
       async (res) => {
@@ -54,16 +53,17 @@ function ProductPage() {
     }
   };
 
+  // const fetchVote = () => {
+  //   fetch(`http://localhost:1234/products/votes/${productId}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setTotalVotes(data.product.votes))
+  //     .catch((error) =>
+  //       console.error("Erreur lors de la récupération des votes :", error)
+  //     );
+  // };
+
   useEffect(() => {
-    const fetchVote = () => {
-      fetch(`http://localhost:1234/products/votes/${productId}`)
-        .then((res) => res.json())
-        .then((data) => setTotalVotes(data.product.votes))
-        .catch((error) =>
-          console.error("Erreur lors de la récupération des votes :", error)
-        );
-    }
-    fetchVote();
+    // fetchVote();
     getOneProduct();
   }, [productId]);
 
@@ -139,15 +139,17 @@ function ProductPage() {
       <hr />
 
       <div className="comment p-4 is-flex">
-        <div className="mr-4">
+        <div className="form mr-4">
           <Comment />
         </div>
-        <div className="list ">
+        <div className="list-of-comments ">
           {comments.map((comment) => {
             return (
               <div key={comment._id} className="box ">
                 <div className="btn-comm-del is-flex is-justify-content-space-between	">
-                  <p className="title is-4 ">{comment.userName}</p>
+                  <p className="title is-4 has-text-info mb-3">
+                    {comment.userName}
+                  </p>
                   {adminData && adminData.payload.role === "admin" ? (
                     <button
                       onClick={() => {
@@ -157,8 +159,10 @@ function ProductPage() {
                     ></button>
                   ) : null}
                 </div>
-                <p className="title is-5"> {comment.title}</p>
-                <p className="subtitle ">Message : {comment.content}</p>
+                <p className="title is-5 mb-5"> {comment.title}</p>
+                <p className="subtitle" id="border-drop-card-name">
+                  Message : <br /> {comment.content}
+                </p>
               </div>
             );
           })}

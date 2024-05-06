@@ -10,9 +10,9 @@ function App() {
   return (
     <>
       <Header />
-      <div className="main-content">
-        <Outlet />
-      </div>
+      {/* <div className="main-content"> */}
+      <Outlet />
+      {/* </div> */}
       <Footer />
     </>
   );

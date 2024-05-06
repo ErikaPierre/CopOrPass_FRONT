@@ -12,6 +12,7 @@ function CardDrop({
   price,
   votes,
   onRemove,
+  isLikedPage,
 }) {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
@@ -91,6 +92,25 @@ function CardDrop({
     }
   };
 
+  const handleDeleteClick = async (e) => {
+    e.preventDefault();
+
+    try {
+      console.log(id);
+      fetch(`http://localhost:1234/drops/${id}/delete-to-like/${userId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          window.location.reload();
+        });
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du like :", error);
+    }
+  };
+
   const handleVote = (votes) => {
     if (!hasVoted) {
       fetch(`http://localhost:1234/drops/votes/${id}`, {
@@ -115,9 +135,11 @@ function CardDrop({
         <div className="btn is-flex is-justify-content-space-between mb-1">
           {user && (
             <div>
-              <button onClick={handleLikeClick} id="border-btn-release">
-                <BsFillBookmarkHeartFill />
-              </button>
+              {!isLikedPage && (
+                <button onClick={handleLikeClick} id="border-btn-release">
+                  <BsFillBookmarkHeartFill />
+                </button>
+              )}
             </div>
           )}
 
@@ -227,7 +249,7 @@ function CardDrop({
           )}
           <div>
             {onRemove && (
-              <button id="border-btn-release" onClick={() => onRemove(id)}>
+              <button id="border-btn-release" onClick={handleDeleteClick}>
                 ❌
               </button>
             )}

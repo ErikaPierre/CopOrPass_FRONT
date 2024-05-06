@@ -12,7 +12,7 @@ function ReleasePage() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const itemsPerPage = 8;
+  const itemsPerPage = 9;
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = releases.slice(indexOfFirstItem, indexOfLastItem);
@@ -62,6 +62,7 @@ function ReleasePage() {
               />
             ))}
           </div>
+          
           {/* Pagination */}
           <nav className="pagination" role="navigation" aria-label="pagination">
             <button

@@ -67,11 +67,11 @@ function LikePage() {
     <>
       <div className="likes p-4">
         <div className="is-flex is-justify-content-center	mb-5">
-          <h2 className="title is-3">SneakyLikes</h2>
+          <h2 className="title is-1">SneakyLikes</h2>
         </div>
 
         <div className="articles">
-          <h2 className=" title is-4 mb-4">Articles</h2>
+          <h2 className=" title is-3 has-text-info mb-4">Articles</h2>
           <div className="articles-like">
             {Array.isArray(articleLiked) &&
               articleLiked.map((article) => {
@@ -88,6 +88,7 @@ function LikePage() {
                       date={article.date}
                       isLike={article.isLike}
                       onRemove={removeArticleLiked}
+                      isLikedPage={true}
                     />
                   </>
                 );
@@ -96,7 +97,7 @@ function LikePage() {
         </div>
 
         <div className="release ">
-          <h2 className=" title is-4 mt-4 mb-4">Releases</h2>
+          <h2 className="title is-3 has-text-info mt-4 mb-4">Releases</h2>
           <div className="release-like is-flex">
             {Array.isArray(releaseLiked) &&
               releaseLiked.map((release) => {
@@ -112,6 +113,7 @@ function LikePage() {
                       color={release.color}
                       isLike={release.isLike}
                       onRemove={removeReleaseLiked}
+                      isLikedPage={true}
                     />
                   </>
                 );
@@ -120,7 +122,7 @@ function LikePage() {
         </div>
 
         <div className="drops">
-          <h2 className="title is-4 mt-4 mb-4">Drops</h2>
+          <h2 className="title is-3 has-text-info mt-4 mb-4">Drops</h2>
           <div className="drop-like is-flex">
             {Array.isArray(dropLiked) &&
               dropLiked.map((drop) => {
@@ -137,6 +139,7 @@ function LikePage() {
                       price={drop.price}
                       isLike={drop.isLike}
                       onRemove={removeDropLiked}
+                      isLikedPage={true}
                     />
                   </>
                 );

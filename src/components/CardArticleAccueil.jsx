@@ -1,17 +1,20 @@
+import { enqueueSnackbar, useSnackbar } from "notistack";
+
 function CardArticleAccueil({
+  id,
   image,
   category,
   name,
   content,
   date,
-  id,
   onRemove,
+  isLikedPage,
 }) {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
   const user = userData ? userData.payload.role === "user" : adminData;
-
-  const userId = userData ? userData.payload._id : null;
+  const userId = userData ? userData.payload.id : null;
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleLikeClick = async (e) => {
     e.preventDefault();
@@ -19,6 +22,38 @@ function CardArticleAccueil({
     try {
       fetch(`http://localhost:1234/products/${id}/insert-to-like/${userId}`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (res.ok) {
+            window.location.reload();
+            enqueueSnackbar("Ce produit à bien été ajouté dans vos likes", {
+              variant: "success",
+            });
+          }
+        });
+    } catch (error) {
+      console.error(
+        "Erreur lors de la mise à jour du like :",
+        error,
+        enqueueSnackbar(
+          "Une erreur est survenue lors de la mise à jour du like.",
+          {
+            variant: "error",
+          }
+        )
+      );
+    }
+  };
+
+  const handleDeleteClick = async (e) => {
+    e.preventDefault();
+
+    try {
+      fetch(`http://localhost:1234/products/${id}/delete-to-like/${userId}`, {
+        method: "DELETE",
         headers: { "Content-Type": "application/json" },
       })
         .then((res) => res.json())
@@ -49,13 +84,18 @@ function CardArticleAccueil({
                 {user ? (
                   <>
                     <div className="like">
-                      <button onClick={handleLikeClick} id="border-btn-release">
-                        ❤️
-                      </button>
+                      {!isLikedPage && (
+                        <button
+                          onClick={handleLikeClick}
+                          id="border-btn-release"
+                        >
+                          ❤️
+                        </button>
+                      )}
                       {onRemove && (
                         <button
                           id="border-btn-release"
-                          onClick={() => onRemove(id)}
+                          onClick={handleDeleteClick}
                         >
                           ❌
                         </button>

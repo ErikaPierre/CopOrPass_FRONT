@@ -1,4 +1,15 @@
 function TableNewsletter({ id, email }) {
+  const deleteSubscriber = (id) => {
+    fetch(`http://localhost:1234/newsletter/delete/${id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    }).then(async (res) => {
+      const data = await res.json();
+      console.log(data.email);
+      window.location.reload();
+    });
+  };
+
   return (
     <>
       <div>TableNewsletter</div>
@@ -16,7 +27,7 @@ function TableNewsletter({ id, email }) {
           </tr>
           <div className="btn-tab mt-1">
             <button
-              onClick={() => deleteUser(id)}
+              onClick={() => deleteSubscriber(id)}
               className="button is-danger mr-2"
             >
               Supprimer

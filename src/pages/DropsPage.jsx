@@ -12,7 +12,7 @@ function DropsPage() {
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
   const admin = adminData ? adminData.payload.role === "admin" : userData;
 
-  const itemsPerPage = 8;
+  const itemsPerPage = 9;
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
