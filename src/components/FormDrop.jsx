@@ -29,7 +29,7 @@ function FormDrop() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((error) => {
         console.error("Error:", error);

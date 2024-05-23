@@ -352,27 +352,47 @@ function CardDrop({
     price: price,
   });
 
-  const formData = new FormData();
-  for (const file of selectedImage) {
-    formData.append("image", file);
-  }
-  formData.append("brand", brand);
-  formData.append("modeleName", modeleName);
-  formData.append("color", color);
-  formData.append("price", price);
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
 
-  function editDrop(id) {
+    const formData = new FormData();
+    if (selectedImage) {
+      formData.append("image", selectedImage);
+      console.log(selectedImage);
+    }
+    formData.append("brand", statutProduct.brand);
+    formData.append("modeleName", statutProduct.modeleName);
+    formData.append("color", statutProduct.color);
+    formData.append("price", statutProduct.price);
+
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
+    const formDataObject = {};
+    formData.forEach((value, key) => {
+      formDataObject[key] = value;
+    });
+    console.log(formDataObject);
+
+    editDrop(id, formDataObject);
+  };
+
+  function editDrop(id, formDataObject) {
     fetch(`http://localhost:1234/drops/update/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(formDataObject),
     })
       .then(async (res) => {
-        const data = await res.json();
-        console.log(data.drops);
-        setDrops(data.drops);
-        setShowModal(false);
-        window.location.reload();
+        try {
+          const data = await res.json();
+          console.log(data.drops);
+          setDrops(data.drops);
+          setShowModal(false);
+          // window.location.reload();
+        } catch (error) {
+          console.error("Erreur lors du parsing JSON:", error);
+        }
       })
       .catch((error) => console.error("Error:", error));
   }
@@ -392,7 +412,7 @@ function CardDrop({
   }
 
   const handleChange = (e) => {
-    setStatutProduct({ ...formData, [e.target.name]: e.target.value });
+    setStatutProduct({ ...statutProduct, [e.target.name]: e.target.value });
   };
 
   const handleImage = (e) => {
@@ -404,7 +424,6 @@ function CardDrop({
     };
     reader.readAsDataURL(file);
   };
-  
 
   const handleLikeClick = async (e) => {
     e.preventDefault();
@@ -501,74 +520,70 @@ function CardDrop({
                   <div className="modal-content">
                     <div className="box">
                       <h2 className="title is-4">Modifier le produit</h2>
-                      <div className="field">
-                        <label className="label">Image</label>
-                        <div className="control">
-                          <input
-                            className="input"
-                            type="file"
-                            name="price"
-                            value={statutProduct.image}
-                            onChange={handleImage}
-                          />
+                      <form onSubmit={handleFormSubmit}>
+                        <div className="field">
+                          <label className="label">Image</label>
+                          <div className="control">
+                            <input
+                              className="input"
+                              type="file"
+                              name="image"
+                              onChange={handleImage}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="field">
-                        <label className="label">Marque</label>
-                        <div className="control">
-                          <input
-                            className="input"
-                            type="text"
-                            name="brand"
-                            value={statutProduct.brand}
-                            onChange={handleChange}
-                          />
+                        <div className="field">
+                          <label className="label">Marque</label>
+                          <div className="control">
+                            <input
+                              className="input"
+                              type="text"
+                              name="brand"
+                              value={statutProduct.brand}
+                              onChange={handleChange}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="field">
-                        <label className="label">Modèle</label>
-                        <div className="control">
-                          <input
-                            className="input"
-                            type="text"
-                            name="modeleName"
-                            value={statutProduct.modeleName}
-                            onChange={handleChange}
-                          />
+                        <div className="field">
+                          <label className="label">Modèle</label>
+                          <div className="control">
+                            <input
+                              className="input"
+                              type="text"
+                              name="modeleName"
+                              value={statutProduct.modeleName}
+                              onChange={handleChange}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="field">
-                        <label className="label">Colori</label>
-                        <div className="control">
-                          <input
-                            className="input"
-                            type="text"
-                            name="color"
-                            value={statutProduct.color}
-                            onChange={handleChange}
-                          />
+                        <div className="field">
+                          <label className="label">Colori</label>
+                          <div className="control">
+                            <input
+                              className="input"
+                              type="text"
+                              name="color"
+                              value={statutProduct.color}
+                              onChange={handleChange}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="field">
-                        <label className="label">Prix</label>
-                        <div className="control">
-                          <input
-                            className="input"
-                            type="number"
-                            name="price"
-                            value={statutProduct.price}
-                            onChange={handleChange}
-                          />
+                        <div className="field">
+                          <label className="label">Prix</label>
+                          <div className="control">
+                            <input
+                              className="input"
+                              type="number"
+                              name="price"
+                              value={statutProduct.price}
+                              onChange={handleChange}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <button
-                        className="button is-primary"
-                        onClick={() => {
-                          editDrop(id);
-                        }}
-                      >
-                        Confirmer
-                      </button>
+                        <button className="button is-primary" type="submit">
+                          Confirmer
+                        </button>
+                      </form>
                     </div>
                   </div>
                   <button
