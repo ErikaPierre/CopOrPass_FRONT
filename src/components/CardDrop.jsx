@@ -365,37 +365,29 @@ function CardDrop({
     formData.append("color", statutProduct.color);
     formData.append("price", statutProduct.price);
 
-    formData.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
-    });
-    const formDataObject = {};
-    formData.forEach((value, key) => {
-      formDataObject[key] = value;
-    });
-    console.log(formDataObject);
-
-    editDrop(id, formDataObject);
+    editDrop(id, formData);
   };
 
-  function editDrop(id, formDataObject) {
-    fetch(`http://localhost:1234/drops/update/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formDataObject),
-    })
-      .then(async (res) => {
-        try {
-          const data = await res.json();
-          console.log(data.drops);
-          setDrops(data.drops);
-          setShowModal(false);
-          // window.location.reload();
-        } catch (error) {
-          console.error("Erreur lors du parsing JSON:", error);
-        }
-      })
-      .catch((error) => console.error("Error:", error));
-  }
+  const editDrop = async (id, formData) => {
+    console.log(formData.image);
+    try {
+      const response = fetch(`http://localhost:1234/drops/update/${id}`, {
+        method: "PUT",
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error("network respons was not ok");
+      }
+
+      const data = await res.json();
+      console.log(data.updateDrop);
+      setDrops(data.updateDrop);
+      setShowModal(false);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
   function deleteDrop(id) {
     fetch(`http://localhost:1234/drops/remove/${id}`, {
