@@ -12,18 +12,20 @@ function CardRelease({
   color,
   votes,
   handleLike,
+  handleDislike,
+  onRemove,
+  isLikedPage,
 }) {
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
   const admin = adminData ? adminData.payload.role === "admin" : userData;
   const user = userData ? userData.payload.role === "user" : adminData;
+  const userId = userData ? userData.payload.id : null;
 
   const [releases, setReleases] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [liked, setLiked] = useState(false);
   // const [totalVotes, setTotalVotes] = useState(0);
-
-  const userId = userData ? userData.payload._id : null;
 
   // const [image, setImage] = useState([]);
   const [formData, setFormData] = useState({
@@ -83,6 +85,24 @@ function CardRelease({
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          // window.location.reload();
+        });
+    } catch (error) {
+      console.error("Erreur lors de la mise à jour du like :", error);
+    }
+  };
+
+  const handleDeleteClick = async (e) => {
+    e.preventDefault();
+
+    try {
+      fetch(`http://localhost:1234/releases/${id}/delete-to-like/${userId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
           window.location.reload();
         });
     } catch (error) {
@@ -90,16 +110,38 @@ function CardRelease({
     }
   };
 
-  const handleButtonClick = async () => {
+  const like = async () => {
     try {
-      const response = await fetch(`http://localhost:1234/releases/${id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
-
+      const response = await fetch(
+        `http://localhost:1234/releases/votes/${id}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       if (response.ok) {
         setLiked(true);
         handleLike(id);
+      } else {
+        console.error("Erreur lors de l'enregistrement du like");
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'enregistrement du like :", error);
+    }
+  };
+
+  const dislike = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:1234/releases/devotes/${id}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      if (response.ok) {
+        setLiked(true);
+        handleDislike(id);
       } else {
         console.error("Erreur lors de l'enregistrement du like");
       }
@@ -113,9 +155,11 @@ function CardRelease({
       <div className="btn is-flex is-justify-content-space-between	mb-1">
         {user && (
           <div>
-            <button onClick={handleLikeClick} id="border-btn-release">
-              <BsFillBookmarkHeartFill />
-            </button>
+            {!isLikedPage && (
+              <button onClick={handleLikeClick} id="border-btn-release">
+                <BsFillBookmarkHeartFill />
+              </button>
+            )}
           </div>
         )}
 
@@ -232,13 +276,21 @@ function CardRelease({
             )}
           </>
         )}
+        <div>
+          {onRemove && (
+            <button id="border-btn-release" onClick={handleDeleteClick}>
+              ❌
+            </button>
+          )}
+        </div>
       </div>
+
       <span className="is-size-3 is-size-4-touch has-text-weight-bold">
         {dateRelease}
       </span>
       <div className="card-image">
         <figure className="image is-1by1">
-          <img src={image} alt="" />
+          <img src={`http://localhost:1234/${image}`} alt="" />
         </figure>
       </div>
       <div className="title-card is-size-4 has-text-centered p-3">
@@ -255,23 +307,20 @@ function CardRelease({
           <button
             className="button-like mr-2"
             id="border-btn-release"
-            onClick={handleButtonClick}
+            onClick={like}
           >
             &#x1F525;
           </button>
-          <p className="is-size-5-mobile">{votes}</p>
         </div>
+        <p className="is-size-5-mobile">{votes}</p>
         <div className="Dislike is-flex">
           <button
             className="button-dislike mr-2"
             id="border-btn-release"
-            onClick={() => {
-              dislike();
-            }}
+            onClick={dislike}
           >
             &#x1F5D1;
           </button>
-          <p className="is-size-5-mobile">{votes}</p>
         </div>
       </div>
     </div>

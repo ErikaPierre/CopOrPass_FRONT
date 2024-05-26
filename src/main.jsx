@@ -1,7 +1,8 @@
+import "./App.css";
 import App from "./App.jsx";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./App.css";
+import { SnackbarProvider } from "notistack";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
@@ -13,7 +14,7 @@ import ReleasePage from "./pages/ReleasePage.jsx";
 import DropsPage from "./pages/DropsPage.jsx";
 import LikePage from "./pages/LikePage.jsx";
 import UserPage from "./pages/UserPage.jsx";
-import { SnackbarProvider } from "notistack";
+import NewsletterPage from "./pages/NewsletterPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/users",
         element: <UserPage />,
+      },
+      {
+        path: "/newsletter",
+        element: <NewsletterPage />,
       },
       {
         path: "/galerie",

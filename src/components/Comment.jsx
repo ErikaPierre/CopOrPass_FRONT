@@ -1,31 +1,23 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 function Comment() {
+  const { productId } = useParams();
+
   const userData = JSON.parse(sessionStorage.getItem("user"));
   const adminData = JSON.parse(sessionStorage.getItem("admin"));
 
-  // const [comments, setComments] = useState([]);
-
-  const [userName, setUserName] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  // const getAllComments = () => {
-  //   fetch("http://localhost:1234/comments/all").then(async (res) => {
-  //     const data = await res.json();
-  //     console.log(data.comments);
-  //     setComments(data.comments);
-  //   });
-  // };
-
-  const createComment = async (e) => {
+  const createCommentInProduct = async (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:1234/comments/create", {
+    fetch(`http://localhost:1234/comments/create/${productId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        userName: userName,
+        userName: userData.payload.userName,
         title: title,
         content: content,
       }),
@@ -39,28 +31,14 @@ function Comment() {
       });
   };
 
-  useEffect(() => {
-    // getAllComments();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
       <div className="Comment-list">
         <div>
           {userData || adminData ? (
-            <form onSubmit={createComment} className="comment-form">
-              <div className="field">
-                <label className="label">Name</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                  />
-                </div>
-              </div>
-
+            <form onSubmit={createCommentInProduct} className="comment-form">
               <div className="field">
                 <label className="label">Titre</label>
                 <div className="control">
@@ -88,7 +66,7 @@ function Comment() {
               </div>
 
               <button
-                onClick={createComment}
+                onClick={createCommentInProduct}
                 type="submit"
                 className="button is-info is-outlined"
               >
